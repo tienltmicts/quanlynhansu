@@ -2,22 +2,22 @@
 {% block content %}
 
 <div style="margin: 100px auto; width: 30%; text-align: center" class="border" >
-  <form class="border border-light p-5" method="POST" action="{% url 'login'%}">
-    {% csrf_token %}
+    <form class="border border-light p-5" method="POST" action="{% url 'login'%}">
+        {% csrf_token %}
+        <p class="h4 mb-4 text-center">Công ty BeCoStar</p>
 
-    <p class="h4 mb-4 text-center">Công ty BeCoStar</p>
-
-    <input type="hidden" name="text" value="/" />
-    <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Username" {{form.username}} <span class="glyphicon glyphicon-envelope form-control-feedback">
-        </span>
-    </div>
-    <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" {{form.password}} <span class="glyphicon glyphicon-lock form-control-feedback">
-        </span>
-    </div>
-
-    <button class="btn btn-primary btn-block my-2" type="submit">Sign in</button>
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="Username" {{form.username}} <span class="glyphicon glyphicon-envelope form-control-feedback">
+            </span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Password" {{form.password}} <span class="glyphicon glyphicon-lock form-control-feedback">
+            </span>
+        </div>
+        {% if messages %}
+            <p class="text-yellow-600">{{ messages }}</p>
+        {% endif %}
+        <button class="btn btn-primary btn-block my-2" type="submit">Đăng nhập</button>
 
   </form>
 </div>

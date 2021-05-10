@@ -6,3 +6,6 @@ from . import views
 urlpatterns = [
    
 ]
+from django.contrib import admin
+
+admin.autodiscover()

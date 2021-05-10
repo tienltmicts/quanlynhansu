@@ -2,8 +2,12 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import LoginForm
+from django.views.decorators.csrf import csrf_protect
+
 
 # Create your views here.
+
+@csrf_protect
 def user_login(request):
     messages = ''
     if request.method == 'POST':
@@ -14,8 +18,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 request.session.set_expiry(0)
-                login(request, user)
-                print(user)
+                login(request, user)  
                 return HttpResponseRedirect('/admin')
             else:
                 messages = "Tên tài khoản hoặc mật khẩu của bạn không đúng"
