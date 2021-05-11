@@ -25,40 +25,46 @@
         <div class="row">
             <div class="col-md-6 col-sm-12">
                 <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="m-0">Thống kê</h5>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-sm">
-                            <tbody>
-                                <tr>
-                                    <td><a href="#" >Thống kê nhân viên theo chức vụ</a></td>
-                                    <td>
-                                    <div class="btn-group float-right">   
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" >Thống kê nhân viên theo phòng ban</a></td>
-                                    <td>
-                                    <div class="btn-group float-right">   
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#" >Thống kê theo lương</a></td>
-                                    <td>
-                                    <div class="btn-group float-right">   
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    {%for group in user.groups.all%}
+                        {%if group.name == 'QuanLyNhanSu' or group.name == 'Admin' %}
+                            <div class="card-header">
+                                <h5 class="m-0">Thống kê</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="#" >TK nhân viên theo chức vụ</a></td>
+                                            <td>
+                                            <div class="btn-group float-right">   
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" >TK nhân viên theo phòng ban</a></td>
+                                            <td>
+                                            <div class="btn-group float-right">   
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#" >TK nhân viên theo lương</a></td>
+                                            <td>
+                                            <div class="btn-group float-right">   
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    {%elif group.name == 'KeToan' or group.name == 'Admin' %}
+                     {%endif%}
+            {%endfor%}
+
                 <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h5 class="m-0">Quản lý lương</h5>

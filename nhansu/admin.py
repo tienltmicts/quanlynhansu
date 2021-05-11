@@ -50,9 +50,9 @@ class NguoiDungAdmin(admin.ModelAdmin):
     list_display = ('id','taikhoan', 'hoVaTen', 'diaChi', 'email', 'ngaySinh', 'soDienThoai', 'get_hosolylich', 'get_chuyenmon','get_tdnn', 'get_thannhan', 'trangThaiLamViec' )
     search_field = ('hoVaTen', 'taikhoan')
     def get_hosolylich(self,obj):
-        hoSoLyLich  = HoSoLyLich.objects.filter(nhanVien=obj)
+        hoSoLyLich  = LyLichCongTac.objects.filter(nhanVien=obj)
         return mark_safe("<br/>".join([str(m) for m in hoSoLyLich]))
-    get_hosolylich.short_description = 'Hồ Sơ Lý Lịch'
+    get_hosolylich.short_description = 'Lý Lịch Công Tác'
     
     def get_chuyenmon(self, obj):
         chuyenMon  = ChuyenMonNhanVien.objects.filter(nhanVien=obj)
@@ -69,6 +69,12 @@ class NguoiDungAdmin(admin.ModelAdmin):
     get_thannhan.short_description = 'Thân Nhân'
 
 admin.site.register(NguoiDung, NguoiDungAdmin)
+
+class LyLichCongTacAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nhanVien', 'tenNoiCongTac', 'thoiGian', 'diaChi')
+    search_field = ('nhanVien')
+
+admin.site.register(LyLichCongTac, LyLichCongTacAdmin)
 
 class TDNNNhanVienAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'ngonNgu', 'mucDo')
@@ -99,12 +105,12 @@ class NhanVienPhongBanAdmin(admin.ModelAdmin):
     search_field = ('nhanVien', 'phongBan')
     def get_nvKTKL(self, obj):
         nvKTKL  = NhanVienKTKL.objects.filter(nhanVienPB=obj)
-        return mark_safe("<br/>".join([m for m in nvKTKL]))
+        return mark_safe("<br/>".join([str(m) for m in nvKTKL]))
     get_nvKTKL.short_description = 'Khen thưởng kỷ luật'
     
     def get_phieuluong(self, obj):
         phieuluong  = PhieuLuong.objects.filter(nhanVienPB=obj).order_by('-ngayPhat')
-        return mark_safe("<br/>".join([m for m in phieuluong]))
+        return mark_safe("<br/>".join([str(m) for m in phieuluong]))
     get_phieuluong.short_description = 'Phiếu lương'
     
 admin.site.register(NhanVienPhongBan, NhanVienPhongBanAdmin)

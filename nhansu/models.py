@@ -114,11 +114,11 @@ class NguoiDung(models.Model):
     def __str__(self):
         return self.hoVaTen
     
-class HoSoLyLich(models.Model):
+class LyLichCongTac(models.Model):
     class Meta:
-        db_table = "hosolylich"
-        verbose_name = "HoSoLyLich"
-        verbose_name_plural = "HoSoLyLich"
+        db_table = "lyLichCongTac"
+        verbose_name = "LyLichCongTac"
+        verbose_name_plural = "LyLichCongTac"
         
     nhanVien = models.ForeignKey(NguoiDung, on_delete=models.CASCADE)
     tenNoiCongTac = models.CharField(max_length=255)
