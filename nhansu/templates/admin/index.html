@@ -7,12 +7,12 @@
 
 {% block content_title %} {% trans 'Dashboard' %} {% endblock %}
 
-{% block breadcrumbs %}
+ {% block breadcrumbs %}
     <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-tachometer-alt"></i> {% trans 'Home' %}</a></li>
         <li class="breadcrumb-item">{% trans 'Dashboard' %}</li>
     </ol>
-{% endblock %}
+{% endblock %} 
 
 
 {% block content %}
@@ -126,6 +126,49 @@
                     {% endif %}
 
                 {% endfor %}
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h5 class="m-0">Thông tin cá nhân</h5>
+                    </div>
+                    <div class= "card-body">
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <td><a href="#" >Thông tin bản thân</a></td>
+                                    <td>
+                                    <div class="btn-group float-right">   
+                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" >Thông tin thân nhân</a></td>
+                                    <td>
+                                    <div class="btn-group float-right">   
+                                        <a href="{ % url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" >Thông tin công tác</a></td>
+                                    <td>
+                                    <div class="btn-group float-right">   
+                                        <a href="{ % url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#" >Thông tin chuyển giao phòng ban</a></td>
+                                    <td>
+                                    <div class="btn-group float-right">   
+                                        <a href="{ % url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 
             </div>
         </div>
@@ -134,7 +177,7 @@
     <div class="col-lg-3 col-12">
         <div id="content-related">
             <div class="module" id="recent-actions-module">
-                <h3>{% trans 'Recent actions' %}</h3>
+                <h3>{% trans 'Hoạt động gần đây' %}</h3>
                 {% load log %}
                 {% get_admin_log 6 as admin_log for_user user %}
                 {% if not admin_log %}
