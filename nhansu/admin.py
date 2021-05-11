@@ -51,17 +51,17 @@ class NguoiDungAdmin(admin.ModelAdmin):
     search_field = ('hoVaTen', 'taikhoan')
     def get_hosolylich(self,obj):
         hoSoLyLich  = HoSoLyLich.objects.filter(nhanVien=obj)
-        return mark_safe("<br/>".join([m for m in hoSoLyLich]))
+        return mark_safe("<br/>".join([str(m) for m in hoSoLyLich]))
     get_hosolylich.short_description = 'Hồ Sơ Lý Lịch'
     
     def get_chuyenmon(self, obj):
         chuyenMon  = ChuyenMonNhanVien.objects.filter(nhanVien=obj)
-        return mark_safe("<br/>".join([m for m in chuyenMon]))
+        return mark_safe("<br/>".join([str(m) for m in chuyenMon]))
     get_chuyenmon.short_description = 'Chuyên Môn'
     
     def get_tdnn(self, obj):
         trinhDoNN  = TDNNNhanVien.objects.filter(nhanVien=obj)
-        return mark_safe("<br/>".join([m for m in trinhDoNN]))
+        return mark_safe("<br/>".join([(m) for m in trinhDoNN]))
     get_tdnn.short_description = 'Trình Độ Ngoại Ngữ'
     
     def get_thannhan(self,obj):
