@@ -191,3 +191,4 @@ class PhieuLuong(models.Model):
     nhanVienPB = models.ForeignKey(NhanVienPhongBan, on_delete=models.CASCADE)
     ngayPhat = models.DateField(null=True, blank=True)
     tongTien = models.BigIntegerField()
+    
