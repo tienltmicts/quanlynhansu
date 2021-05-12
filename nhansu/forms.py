@@ -9,4 +9,6 @@ class LoginForm(forms.Form):
 class TinhLuongForm(forms.Form):
     nhanVien = forms.Select(choices= NhanVienPhongBan.objects.all())
     
+class FilterForm(forms.Form):
+    param = forms.CharField(widget=forms.TextInput())
     

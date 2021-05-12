@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Bảng lương | Công ty BeCoStar</title>
+  <title>TK theo phòng ban | Công ty BeCoStar</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/static/vendor/fontawesome-free/css/all.min.css">
@@ -492,7 +492,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'tk_phongban' %}" class="nav-link">
+              <a href="{% url 'tk_phongban' %}" class="nav-link active">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>TK NVtheoPhongBan</p>
               </a>
@@ -511,7 +511,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'bangluong' %}" class="nav-link active">
+              <a href="{% url 'bangluong' %}" class="nav-link ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>BangLuong</p>
               </a>
@@ -527,14 +527,14 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-auto col-sm-3">
-              <h1 class="m-0"> Bảng lương </h1>
+              <h1 class="m-0"> Thống kê nhân viên theo phòng ban </h1>
             </div>
             <div class="col-auto col-sm-9">
 
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i> Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="#">QuanLyLuong</a></li>
-                <li class="breadcrumb-item active">BangLuong</li>
+                <li class="breadcrumb-item"><a href="#">ThongKe</a></li>
+                <li class="breadcrumb-item active">TKTheoPhongBan</li>
               </ol>
 
             </div>
@@ -551,7 +551,7 @@
               <div class="col-12">
                 <div class="card card-primary card-outline">
                   <div class="card-header">
-                    <h4 class="card-title">Chọn bảng lương để thay đổi</h4>
+                    <h4 class="card-title">Chọn Phòng ban để thống kê</h4>
                     <div class="card-tools form-inline">
 
                       <form id="changelist-search" class="form-inline mt-2" method="GET">
@@ -562,9 +562,9 @@
                   </div>
 
                   <div class="card-body">
-                    <form id="changelist-form" method="post" novalidate=""><input type="hidden"
+                    {% comment %} <form id="changelist-form" method="post" novalidate=""><input type="hidden"
                         name="csrfmiddlewaretoken"
-                        value="F94loZBkUBqiT7Jkl4YXTCoHHBtAR4BatNEvvDabbOXzzn2GQul9gn5MRTt7MjBc">
+                        value="F94loZBkUBqiT7Jkl4YXTCoHHBtAR4BatNEvvDabbOXzzn2GQul9gn5MRTt7MjBc"> {% endcomment %}
                       <div id="content-main">
 
                         <div class="module" id="changelist">
@@ -572,54 +572,47 @@
                             <div class="col-12">
 
                               <div class="row">
+                                
                                 <div class="col-12 col-sm-8">
+                                    <form method="GET" action="{% url 'tk_phongban' %}" >
+                                  <div class="actions">
 
-                                  {% comment %} <div class="actions">
-
-                                    <label><select name="action" required="" class="form-control">
-                                        <option value="" selected="">---------</option>
-
-                                        <option value="delete_selected">Xóa các bảng lương đã chọn</option>
-
+                                    <label><select name="param" required="" class="form-control">
+                                        <option value="" selected="" data-select2-id="select2-data-2-ecfv">---------
+                                        {% for k in filter %}
+                                            {% if k == query_string %}
+                                            <option value="{{k}}" selected>{{k}}</option>
+                                            {%else%}
+                                            <option value="{{k}}">{{k}}</option>
+                                            {% endif %}
+                                            {% endfor %}
                                       </select></label><label><input type="hidden" name="select_across" value="0"
                                         class="select-across"></label>
 
                                     <button type="submit" class="btn btn-outline-primary"
-                                      style="margin-right: 5px; margin-left: 15px;" title="Bắt đầu hành động lựa chọn"
+                                      style="margin-right: 5px; margin-left: 15px;" 
                                       name="index" value="0">
                                       Đi
                                     </button>
-                                  </div> {% endcomment %}
-
+                                  </div> 
+                                    </form>
                                 </div>
-                                <div class="col-12 col-sm-4">
-
-                                  <a href="{% url 'tinhluong' %}" class="btn btn-outline-success float-right">
-                                    <i class="fa fa-plus-circle"></i> &nbsp; Thêm vào Bảng lương
-                                  </a>
-
-                                </div>
+                                
                               </div>
                               <hr>
-
+                                {% if messages %}
+                                    <p class="text-danger">{{ messages }}</p>
+                                {% endif %}
                               <div class="card">
                                 <div class="card-body table-responsive p-0">
                                   <table id="result_list" class="table table-striped">
                                     <thead>
                                       <tr>
 
-                                        <th class="djn-checkbox-select-all" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
-
-                                            <span><input type="checkbox" id="action-toggle"></span>
-
-                                          </div>
-                                        </th>
-
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=1">ID</a>
+                                            <a href="?o=1">STT</a>
 
                                           </div>
                                         </th>
@@ -635,7 +628,7 @@
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=3">Phòng ban</a>
+                                            <a href="?o=3">Tên Phòng ban</a>
 
                                           </div>
                                         </th>
@@ -643,7 +636,7 @@
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=4">Chức vụ</a>
+                                            <a href="?o=4">Mã Phòng ban</a>
 
                                           </div>
                                         </th>
@@ -651,7 +644,7 @@
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=5">Lương tháng</a>
+                                            <a href="?o=5">Thời gian bắt đầu</a>
 
                                           </div>
                                         </th>
@@ -659,7 +652,7 @@
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=6">Thực lãnh</a>
+                                            <a href="?o=6">Thời gian kết thúc</a>
 
                                           </div>
                                         </th>
@@ -667,25 +660,22 @@
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
 
-                                            <a href="?o=7">Ngày chấm</a>
+                                            <a href="?o=7">Chức vụ</a>
 
                                           </div>
                                         </th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      {% for pl in bangluong%}
+                                      {% for nv in nhanVien %}
                                         <tr role="row" class="even">
-                                          <td >
-                                            <a href="{% url 'xoaHangbangluong' pl.id %}" class="btn btn-danger" role="button" onclick="return confirm('Bạn chắc chắn muốn huỷ chọn?');"><i class="fas fa-trash"></i></a>
-                                          </td>
-                                            <td>{{pl.id}}</td>
-                                            <td>{{pl.nhanVienPB.nhanVien}}</td>
-                                            <td>{{pl.nhanVienPB.phongBan}}</td>
-                                            <td>{{pl.nhanVienPB.chucVu}}</td>
-                                            <td>{{pl.nhanVienPB.mucLuong.soTien}} vnđ</td>
-                                            <td>{{pl.tongTien}}</td>
-                                            <td>{{pl.ngayPhat}}</td>
+                                            <td class="font-weight-bold">{{forloop.counter}}</td>
+                                            <td>{{nv.nhanVien}}</td>
+                                            <td>{{nv.phongBan.tenPhongBan}}</td>
+                                            <td>{{nv.phongBan}}</td>
+                                            <td>{{nv.tg_batDau}}</td>
+                                            <td>{{nv.tg_ketThuc}}</td>
+                                            <td>{{nv.chucVu}}</td>
                                         </tr>
                                       {% endfor %}
                                     </tbody>
@@ -705,7 +695,7 @@
                           </div>
                         </div>
                       </div>
-                    </form>
+                    {% comment %} </form> {% endcomment %}
                   </div>
 
                 </div>

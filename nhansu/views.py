@@ -1,7 +1,7 @@
 from django.shortcuts import render,  get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import LoginForm, TinhLuongForm
+from .forms import LoginForm, TinhLuongForm, FilterForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
@@ -65,7 +65,6 @@ def bangluong(request):
     bangLuong = []
     for i in PhieuLuong.objects.all():
         bangLuong.append(i)
-    print(bangLuong)
     return render(request, "admin/bangluong.html", {'bangluong': bangLuong})  
 
 def xoa_hangbangluong(request, id):
@@ -74,27 +73,96 @@ def xoa_hangbangluong(request, id):
     messages.success(request, 'Xoá thành công!')
     return HttpResponseRedirect('/nhansu/bangluong')
     
-# def thongke_phongban(request):
-#     if request.method == 'GET':
-#         form = FilterTKBForm(request.GET)
-#         if form.is_valid():
-#             query_string=request.GET.get('paradigm')
-#             if query_string == 'Học viên theo tên':
-#                 students = schedule.student.all().order_by('name')
-#             elif query_string == 'Học viên theo ID':
-#                 students = schedule.student.all().order_by('pk')
-#             else:
-#                 students = schedule.student.all().order_by('birthday')
-#         else:
-#             form = FilterTKBForm(
-#                 initial= {
-#                     'paradigm': 'Học viên theo tên'
-#                 }
-#             )
-#         return render(request, 'tkb/view_students_list.html', {
-#             'students': students, 
-#             'sub':sub, 
-#             'id': schedule.id,
-#             'filter': filters,
-#             'query_string': query_string
-#             })
+def thongke_phongban(request):
+    nvpb = []
+    phongBan = PhongBan.objects.all()
+    filters = []
+    query_string = 0
+    nhanVien=''
+    for pb in phongBan:
+        filters.append(pb.tenPhongBan)
+    if request.method == 'GET':
+        form = FilterForm(request.GET)
+        if form.is_valid():
+            query_string=request.GET['param']
+            pB = get_object_or_404(PhongBan,tenPhongBan=query_string)
+            nhanVien = NhanVienPhongBan.objects.filter(phongBan=pb)
+            for nv in nhanVien:
+                nvpb.append(nv)
+    else:
+        form = FilterForm()
+
+    return render(request, 'admin/tk_phongban.html', {
+        'form': form,
+        'filter': filters,
+        'query_string': query_string,
+        'nhanVien': nvpb
+        })
+    
+def thongke_chucvu(request):
+    nvpb = []
+    chucVu = ChucVu.objects.all()
+    filters = []
+    query_string = ''
+    nhanVien=''
+    for cv in chucVu:
+        filters.append(cv.tenChucVu)
+    if request.method == 'GET':
+        form = FilterForm(request.GET)
+        if form.is_valid():
+            query_string=request.GET['param']
+            
+            cV = get_object_or_404(ChucVu,tenChucVu=query_string)
+            nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV)
+            for nv in nhanVien:
+                nvpb.append(nv)
+    else:
+        form = FilterForm()
+
+    return render(request, 'admin/tk_chucvu.html', {
+        'form': form,
+        'filter': filters,
+        'query_string': query_string,
+        'nhanVien': nvpb
+        })
+    
+def thongke_mucluong(request):
+    nvpb = []
+    filters = ['Dưới 5 triệu', 'Từ 5-10 triệu', 'Từ 10-15 triệu', 'Từ 15-20 triệu', 'Từ 20-30 triệu', 'Trên 30 triệu']
+    query_string = ''
+    nhanVien=''
+    mucLuong = ''
+    messages = ''
+    if request.method == 'GET':
+        form = FilterForm(request.GET)
+        if form.is_valid():
+            query_string=request.GET['param']
+            if query_string == 'Dưới 5 triệu':
+                mucLuong = MucLuong.objects.filter(soTien__lt=5000000).order_by('-soTien')
+            elif query_string == 'Từ 5-10 triệu':
+                mucLuong = MucLuong.objects.filter(soTien__gt=5000000, soTien__lt=1000000).order_by('-soTien')
+            elif query_string == 'Từ 10-15 triệu':
+                mucLuong = MucLuong.objects.filter(soTien__gt=9999999, soTien__lt=15000000).order_by('-soTien')
+            elif query_string == 'Từ 15-20 triệu':
+                mucLuong = MucLuong.objects.filter(soTien__gt=14999999, soTien__lt=20000000).order_by('-soTien') 
+            elif query_string == 'Từ 20-30 triệu':
+                mucLuong = MucLuong.objects.filter(soTien__gt=19000000, soTien__lt=30000000).order_by('-soTien')
+            else: 
+                mucLuong = MucLuong.objects.filter(soTien__gt=30000000).order_by('-soTien')
+               
+            for ml in mucLuong:
+                nhanVien = NhanVienPhongBan.objects.filter(mucLuong=ml)
+                for nv in nhanVien:
+                    nvpb.append(nv)
+            if nvpb == []:
+                messages = 'Không có nhân viên nào có mức lương trong khoảng này!'
+    else:
+        form = FilterForm()
+
+    return render(request, 'admin/tk_mucluong.html', {
+        'form': form,
+        'filter': filters,
+        'query_string': query_string,
+        'nhanVien': nvpb,
+        'messages': messages
+        })

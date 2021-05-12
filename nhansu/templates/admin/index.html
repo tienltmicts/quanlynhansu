@@ -37,24 +37,24 @@
                                             <td><a href="#" >TK nhân viên theo chức vụ</a></td>
                                             <td>
                                             <div class="btn-group float-right">   
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a>
+                                                          
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" >TK nhân viên theo phòng ban</a></td>
+                                            <td><a href="{% url 'tk_phongban' %}" >TK nhân viên theo phòng ban</a></td>
                                             <td>
                                             <div class="btn-group float-right">   
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                    
+                                                <a href="{% url 'tk_phongban' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Thống kê' %}</a>            
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><a href="#" >TK nhân viên theo lương</a></td>
+                                            <td><a href="{% url 'tk_luong' %}" >TK nhân viên theo lương</a></td>
                                             <td>
                                             <div class="btn-group float-right">   
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                                <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>            
+                                                <a href="{% url 'tk_luong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a>
+                                                       
                                             </td>
                                         </tr>
                                     </tbody>
@@ -73,19 +73,18 @@
                         <table class="table table-sm">
                             <tbody>
                                 <tr>
-                                    <td><a href="#" >Bảng lương</a></td>
+                                    <td><a href="{% url 'bangluong' %}" >Bảng lương</a></td>
                                     <td>
                                     <div class="btn-group float-right">   
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                        <a href="{% url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                        <a href="{% url 'bangluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><a href="#" >Tính lương</a></td>
+                                    <td><a href="{% url 'tinhluong' %}" >Tính lương</a></td>
                                     <td>
                                     <div class="btn-group float-right">   
-                                        <a href="{% url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Tính lương' %}</a>
-                                        <a href="#" class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Thay đổi' %}</a>            
+                                        <a href="{% url 'tinhluong' %}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Tính lương' %}</a> 
                                     </td>
                                 </tr>
                             </tbody>
