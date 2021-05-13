@@ -12,5 +12,19 @@ class TinhLuongForm(forms.Form):
 class FilterForm(forms.Form):
     param = forms.CharField(widget=forms.TextInput())
     
-    
-    
+class ThanNhanForm(forms.Form):   
+    hoVaTen = forms.CharField(widget=forms.TextInput(attrs={
+                'class': 'vTextField'
+            }), max_length=255)
+    diaChi = forms.CharField(widget=forms.Textarea(
+        attrs={
+                'class': 'vTextField'
+            }), required=False)
+    soDienThoai = forms.IntegerField(required=False, widget=forms.NumberInput(
+        attrs={
+                'class': 'vTextField'
+            }))
+    quanHe = forms.CharField(widget=forms.TextInput(attrs={
+                'class': 'vTextField'
+            }), max_length=255)
+   

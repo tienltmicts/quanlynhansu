@@ -1,7 +1,7 @@
 from django.shortcuts import render,  get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from .forms import LoginForm, TinhLuongForm, FilterForm
+from .forms import LoginForm, TinhLuongForm, FilterForm,ThanNhanForm
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
@@ -179,12 +179,45 @@ def tt_banthan(request):
 
 def tt_thannhan(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
-    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
-    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
-    chuyenMon = ''.join(str(cm) for cm in cmon)
-    trinhDoNN = ''.join(str(t) for t in tdnn)
-     
-    return render(request, 'admin/tt_thannhan.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+    thanNhan = nguoiDung.thanNhan 
+    print('abc')
+    if request.method == 'POST':
+        
+        form = ThanNhanForm(request.POST)
+        if form.is_valid():
+            hoVaTen = request.POST['hoVaTen']
+            diaChi = request.POST['diaChi']
+            soDienThoai = request.POST['soDienThoai']
+            quanHe = request.POST['quanHe']
+            print(quanHe)
+            if hoVaTen != thanNhan.hoVaTen:
+                thanNhan.delete()
+                tn = ThanNhan.objects.create(
+                    hoVaTen = hoVaTen,
+                    diaChi = diaChi,
+                    soDienThoai = soDienThoai,
+                    quanHe = quanHe
+                )
+                tn.save()
+                thanNhan = tn
+            else: 
+                ThanNhan.objects.filter(id=thanNhan.id).update(
+                    hoVaTen = hoVaTen,
+                    diaChi = diaChi,
+                    soDienThoai = soDienThoai,
+                    quanHe = quanHe
+                ) 
+             
+    else:
+        form = ThanNhanForm( 
+            initial={
+                'hoVaTen': thanNhan.hoVaTen,
+                'diaChi': thanNhan.diaChi,
+                'soDienThoai': thanNhan.soDienThoai,
+                'quanHe': thanNhan.quanHe
+                    
+            })
+    return render(request, 'admin/tt_thannhan.html', {'form':form, 'nguoiDung': nguoiDung})
 
 def tt_congtac(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
