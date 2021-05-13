@@ -166,7 +166,10 @@ def thongke_mucluong(request):
         'nhanVien': nvpb,
         'messages': messages
         })
-    
+
+def tt_canhan(request):
+    return render(request, "admin/tt_canhan.html")
+
 def tt_banthan(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
     cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
@@ -235,9 +238,6 @@ def tt_congtac_chitiet(request,id):
 
 def tt_chuyengiaopb(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
-    ctac = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
-    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
-    chuyenMon = ''.join(str(cm) for cm in cmon)
-    trinhDoNN = ''.join(str(t) for t in tdnn)
-     
-    return render(request, 'admin/tt_chuyengiaopb.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+    phongBan = NhanVienPhongBan.objects.filter(nhanVien=nguoiDung).order_by('tg_batDau')
+      
+    return render(request, 'admin/tt_chuyengiaopb.html', {'nguoiDung': nguoiDung,'phongBan': phongBan })
