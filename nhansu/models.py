@@ -12,8 +12,8 @@ HINH_THUC_KTKL = [
 class ChucVu(models.Model):
     class Meta:
         db_table = "chucvu"
-        verbose_name = "ChucVu"
-        verbose_name_plural = "ChucVu"
+        verbose_name = "Chức Vụ"
+        verbose_name_plural = "Chức vụ"
 
     tenChucVu = models.CharField(max_length=255)
     baoHiem = models.CharField(max_length=255)
@@ -25,8 +25,8 @@ class ChucVu(models.Model):
 class MucLuong(models.Model):
     class Meta:
         db_table = "mucluong"
-        verbose_name = "MucLuong"
-        verbose_name_plural = "MucLuong"
+        verbose_name = "Mức Lương"
+        verbose_name_plural = "Mức Lương"
 
     maMucLuong = models.CharField(max_length=255)
     soTien = models.BigIntegerField()
@@ -37,8 +37,8 @@ class MucLuong(models.Model):
 class PhongBan(models.Model):
     class Meta:
         db_table = "phongban"
-        verbose_name = "PhongBan"
-        verbose_name_plural = "PhongBan"
+        verbose_name = "Phòng Ban"
+        verbose_name_plural = "Phòng Ban"
         
     maPhongBan = models.CharField(max_length=255)
     tenPhongBan = models.CharField(max_length=255)
@@ -50,8 +50,8 @@ class PhongBan(models.Model):
 class KhenThuongKyLuat(models.Model):
     class Meta:
         db_table = "khenthuong_kyluat"
-        verbose_name = "KhenThuongKyLuat"
-        verbose_name_plural = "KhenThuongKyLuat"
+        verbose_name = "Khen Thưởng Kỷ Luật"
+        verbose_name_plural = "Khen Thưởng Kỷ Luật"
         
     maKTKL = models.CharField(max_length=255)
     tenKTKL = models.CharField(max_length=255)
@@ -65,8 +65,8 @@ class KhenThuongKyLuat(models.Model):
 class ChuyenMon(models.Model):
     class Meta:
         db_table = "chuyenmon"
-        verbose_name = "ChuyenMon"
-        verbose_name_plural = "ChuyenMon"
+        verbose_name = "Chuyên Môn"
+        verbose_name_plural = "Chuyên Môn"
         
     tenChuyenMon = models.CharField(max_length=255)
     
@@ -76,8 +76,8 @@ class ChuyenMon(models.Model):
 class TrinhDoNgoaiNgu(models.Model):
     class Meta:
         db_table = "trinhdoNN"
-        verbose_name = "TrinhDoNgoaiNgu"
-        verbose_name_plural = "TrinhDoNgoaiNgu"
+        verbose_name = "Trình Độ Ngoại Ngữ"
+        verbose_name_plural = "Trình Độ Ngoại Ngữ"
         
     loaiNgonNgu = models.CharField(max_length=255)
     
@@ -87,8 +87,8 @@ class TrinhDoNgoaiNgu(models.Model):
 class ThanNhan(models.Model):
     class Meta:
         db_table = "thannhan"
-        verbose_name = "ThanNhan"
-        verbose_name_plural = "ThanNhan"
+        verbose_name = "Thân Nhân"
+        verbose_name_plural = "Thân Nhân"
         
     hoVaTen = models.CharField(max_length=255)
     diaChi = models.TextField()
@@ -101,8 +101,8 @@ class ThanNhan(models.Model):
 class NguoiDung(models.Model):
     class Meta:
         db_table = "nguoidung"
-        verbose_name = "NguoiDung"
-        verbose_name_plural = "NguoiDung"
+        verbose_name = "Người Dùng"
+        verbose_name_plural = "Người Dùng"
     taikhoan = models.OneToOneField(User, on_delete=models.CASCADE)    
     hoVaTen = models.CharField(max_length=255)
     diaChi = models.TextField()
@@ -117,8 +117,8 @@ class NguoiDung(models.Model):
 class LyLichCongTac(models.Model):
     class Meta:
         db_table = "lyLichCongTac"
-        verbose_name = "LyLichCongTac"
-        verbose_name_plural = "LyLichCongTac"
+        verbose_name = "Lý Lịch Công Tác"
+        verbose_name_plural = "Lý Lịch công Tác"
         
     nhanVien = models.ForeignKey(NguoiDung, on_delete=models.CASCADE)
     tenNoiCongTac = models.CharField(max_length=255)
@@ -185,8 +185,8 @@ class NhanVienKTKL(models.Model):
 class PhieuLuong(models.Model):
     class Meta:
         db_table = "phieuluong"
-        verbose_name = "PhieuLuong"
-        verbose_name_plural = "PhieuLuong"
+        verbose_name = "Phiếu Lương"
+        verbose_name_plural = "Phiếu Lương"
         
     nhanVienPB = models.ForeignKey(NhanVienPhongBan, on_delete=models.CASCADE)
     ngayPhat = models.DateField(null=True, blank=True)
