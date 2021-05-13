@@ -319,7 +319,7 @@
           </div>
           <div class="info">
 
-            <a href="/admin/auth/user/{{user.id}}/change/" class="d-block">{{user.username}}</a>
+            <a href="/admin/auth/user/1/change/" class="d-block">{{user.username}}</a>
 
           </div>
         </div>
@@ -681,19 +681,19 @@
             {%endfor%}
             <li class="nav-header">ThongTinCaNhan</li>
             <li class="nav-item">
-              <a href="{% url 'tt_banthan' %}" class="nav-link ">
+              <a href="{% url 'tt_banthan' %}" class="nav-link">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>ThongTinBanThan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'tt_thannhan' %}" class="nav-link active">
+              <a href="{% url 'tt_thannhan' %}" class="nav-link ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>ThongTinThanNhan</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'tt_congtac' %}" class="nav-link ">
+              <a href="{% url 'tt_congtac' %}" class="nav-link active">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>ThongTinCongTac</p>
               </a>
@@ -724,9 +724,10 @@
                 <li class="breadcrumb-item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i> Trang
                     chủ</a></li>
                 <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">ThongTinCaNhan</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'tt_congtac' %}">ThongTinCongTac</a></li>
                 <li class="breadcrumb-item active">
 
-                  ThongTinThanNhan
+                  ThongTinCongTacChiTiet
 
                 </li>
               </ol>
@@ -736,31 +737,18 @@
         </div>
       </div>
 
-      <div class="content">
+       <div class="content">
         <div class="container-fluid">
           <section id="content" class="content">
-            {%if messages %}
-                <ul class="messages">
-                
-                <div class="alert alert-success  alert-dismissible fade show m-0" role="alert">
-                    {{ messages }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-               
-                </ul>
-            {%endif%}
+
             <div class="row">
               <div id="content-main" class="col-12">
-              <form action="{% url 'tt_thannhan' %}" method="POST">
-              {% csrf_token %}
               <div class="row">
                 <div class="col-12 col-lg-9">
                   <div class="card card-primary card-outline">
                     <div class="card-header">
                       <div class="card-title">
-                        Thông tin thân nhân của nhân viên {{nguoiDung.hoVaTen}}
+                        Thông tin công tác chi tiết
                       </div>
                     </div>
                     <div class="card-body">
@@ -768,49 +756,53 @@
                       <div class="form-group field-taikhoan">
                         <div class="row">
                           <label class="col-sm-2 text-left">
-                            Họ và tên
+                            ID
                           </label>
                           <div class=" col-sm-10 ">
-                            {{form.hoVaTen}}
+                            <input type="text" name="hoVaTen" value="{{congTac.id}}" class="vTextField" maxlength="255"
+                              required="" >
                           </div>
                           <div class="help-block red"></div>
                           <div class="help-block text-red"></div>
                         </div>
                       </div>
-                      
+
+                      <div class="form-group field-taikhoan">
+                        <div class="row">
+                          <label class="col-sm-2 text-left">
+                            Tên nơi công tác
+                          </label>
+                          <div class=" col-sm-10 ">
+                            <input type="text"  value="{{congTac.tenNoiCongTac}}" class="vTextField" maxlength="255"
+                              required="" >
+                          </div>
+                          <div class="help-block red"></div>
+                          <div class="help-block text-red"></div>
+                        </div>
+                      </div>
+
+                      <div class="form-group field-taikhoan">
+                        <div class="row">
+                          <label class="col-sm-2 text-left">
+                            Thời gian
+                          </label>
+                          <div class=" col-sm-10 ">
+                            <input type="text"  value="{{congTac.thoiGian}}" class="vTextField" maxlength="255"
+                              required="" >
+                          </div>
+                          <div class="help-block red"></div>
+                          <div class="help-block text-red"></div>
+                        </div>
+                      </div>
+
                       <div class="form-group field-taikhoan">
                         <div class="row">
                           <label class="col-sm-2 text-left">
                             Địa chỉ
                           </label>
                           <div class=" col-sm-10 ">
-                            {{form.diaChi}}
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Số điện thoại
-                          </label>
-                          <div class=" col-sm-10 ">
-                            {{form.soDienThoai}}
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Quan hệ
-                          </label>
-                          <div class=" col-sm-10 ">
-                            {{form.quanHe}}
+                            <input type="text"  value="{{congTac.diaChi}}" class="vTextField" maxlength="255"
+                              required="" >
                           </div>
                           <div class="help-block red"></div>
                           <div class="help-block text-red"></div>
@@ -833,12 +825,7 @@
                       <div class="card-body">
 
                         <div class="form-group">
-                            <input type="submit" value="Sửa" class="btn btn-outline-success form-control"
-                            name="_save" onclick="return confirm('Bạn chắc chắn muốn sửa thông tin thân nhân?');">
-                        </div>
-
-                        <div class="form-group">
-                          <a type="submit" href="/admin/" class="btn btn-outline-info form-control"
+                          <a type="submit" href="{% url 'tt_congtac' %}" class="btn btn-outline-success form-control"
                             name="thoat">Thoát</a>
                         </div>
                       </div>
@@ -855,9 +842,9 @@
                   </script>
 
                     </div>
-               </form>
+               
               </div>
-                
+
             </div>
           </section>
         </div>

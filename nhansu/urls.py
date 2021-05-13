@@ -13,6 +13,7 @@ urlpatterns = [
    path('tt-banthan/', views.tt_banthan, name="tt_banthan"),
    path('tt-thannhan/', views.tt_thannhan, name="tt_thannhan"),
    path('tt-congtac/', views.tt_congtac, name="tt_congtac"),
+   path('tt-congtac-chitiet/<int:id>/', views.tt_congtac_chitiet, name="tt_congtac_chitiet"),
    path('tt-chuyengiaophongban/', views.tt_chuyengiaopb, name="tt_chuyengiaopb"),
 ]
 from django.contrib import admin

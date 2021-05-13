@@ -180,7 +180,7 @@ def tt_banthan(request):
 def tt_thannhan(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
     thanNhan = nguoiDung.thanNhan 
-    print('abc')
+    messages = ''
     if request.method == 'POST':
         
         form = ThanNhanForm(request.POST)
@@ -207,7 +207,8 @@ def tt_thannhan(request):
                     soDienThoai = soDienThoai,
                     quanHe = quanHe
                 ) 
-             
+            messages = 'Bạn đã sửa thông tin thành công!'
+                         
     else:
         form = ThanNhanForm( 
             initial={
@@ -217,20 +218,24 @@ def tt_thannhan(request):
                 'quanHe': thanNhan.quanHe
                     
             })
-    return render(request, 'admin/tt_thannhan.html', {'form':form, 'nguoiDung': nguoiDung})
+    return render(request, 'admin/tt_thannhan.html', {'form':form, 'nguoiDung': nguoiDung, 'messages': messages})
 
 def tt_congtac(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
-    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
-    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
-    chuyenMon = ''.join(str(cm) for cm in cmon)
-    trinhDoNN = ''.join(str(t) for t in tdnn)
+    ctac = LyLichCongTac.objects.filter(nhanVien=nguoiDung)
+    congTac = []
+    for ct in ctac:
+        congTac.append(ct)
      
-    return render(request, 'admin/tt_congtac.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+    return render(request, 'admin/tt_congtac.html', {'nguoiDung': nguoiDung, 'congTac': congTac})
+
+def tt_congtac_chitiet(request,id):
+    congTac = get_object_or_404(LyLichCongTac,id=id)  
+    return render(request, 'admin/tt_congtac_chitiet.html', {'congTac': congTac})
 
 def tt_chuyengiaopb(request):
     nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
-    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
+    ctac = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
     tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
     chuyenMon = ''.join(str(cm) for cm in cmon)
     trinhDoNN = ''.join(str(t) for t in tdnn)

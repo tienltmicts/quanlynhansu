@@ -681,24 +681,28 @@
             {%endfor%}
             <li class="nav-header">ThongTinCaNhan</li>
             <li class="nav-item">
-                <a href="{% url 'tt_banthan' %}" class="nav-link">
-                    <i class="nav-icon fas fa-circle "></i> <p>ThongTinBanThan</p>
-                </a>
+              <a href="{% url 'tt_banthan' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>ThongTinBanThan</p>
+              </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'tt_thannhan' %}" class="nav-link ">
-                    <i class="nav-icon fas fa-circle "></i> <p>ThongTinThanNhan</p>
-                </a>
+              <a href="{% url 'tt_thannhan' %}" class="nav-link ">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>ThongTinThanNhan</p>
+              </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'tt_congtac' %}" class="nav-link active">
-                    <i class="nav-icon fas fa-circle "></i> <p>ThongTinCongTac</p>
-                </a>
+              <a href="{% url 'tt_congtac' %}" class="nav-link active">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>ThongTinCongTac</p>
+              </a>
             </li>
             <li class="nav-item">
-                <a href="{% url 'tt_chuyengiaopb' %}" class="nav-link">
-                    <i class="nav-icon fas fa-circle "></i> <p>ThongTinChuyenGiaoPB</p>
-                </a>
+              <a href="{% url 'tt_chuyengiaopb' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>ThongTinChuyenGiaoPB</p>
+              </a>
             </li>
 
           </ul>
@@ -722,7 +726,7 @@
                 <li class="breadcrumb-item"><a href="{% url 'admin:index' %}">ThongTinCaNhan</a></li>
                 <li class="breadcrumb-item active">
 
-                  {{nguoiDung}}
+                  ThongTinCongTac
 
                 </li>
               </ol>
@@ -737,200 +741,127 @@
           <section id="content" class="content">
 
             <div class="row">
-              <div id="content-main" class="col-12">
-              <div class="row">
-                <div class="col-12 col-lg-9">
-                  <div class="card card-primary card-outline">
-                    <div class="card-header">
-                      <div class="card-title">
-                        Thông tin nhân viên
-                      </div>
-                    </div>
-                    <div class="card-body">
-                      
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Họ và tên
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text" name="hoVaTen" value="{{nguoiDung.hoVaTen}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
 
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Tên tài khoản
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{user.username}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
+              <div class="col-12">
+                <div class="card card-primary card-outline">
+                  <div class="card-header">
+                    <h4 class="card-title">Thông tin công tác</h4>
+                    <div class="card-tools form-inline">
 
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Mật khẩu
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="Mật khẩu được bảo mật" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
+                      <form id="changelist-search" class="form-inline mt-2" method="GET">
 
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Ngày sinh
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{nguoiDung.ngaySinh}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Email
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{nguoiDung.email}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Địa chỉ
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{nguoiDung.diaChi}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Số điện thoại
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{nguoiDung.soDienThoai}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Trạng thái làm việc
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{nguoiDung.trangThaiLamViec}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Chuyên môn
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{chuyenMon}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
-
-                      <div class="form-group field-taikhoan">
-                        <div class="row">
-                          <label class="col-sm-2 text-left">
-                            Trình độ ngoại ngữ
-                          </label>
-                          <div class=" col-sm-10 ">
-                            <input type="text"  value="{{trinhDoNN}}" class="vTextField" maxlength="255"
-                              required="" >
-                          </div>
-                          <div class="help-block red"></div>
-                          <div class="help-block text-red"></div>
-                        </div>
-                      </div>
+                      </form>
 
                     </div>
                   </div>
-                </div>
-                <div class="col-12 col-lg-3">
-                  <div id="jazzy-actions" class="">
 
-                    <div class="card card-primary card-outline">
-                      <div class="card-header">
-                        <h3 class="card-title">
-                          <i class="fas fa-edit"></i>
-                          Actions
-                        </h3>
-                      </div>
-                      <div class="card-body">
+                  <div class="card-body">
+                    <form id="changelist-form" method="post" novalidate=""><input type="hidden"
+                        name="csrfmiddlewaretoken"
+                        value="F94loZBkUBqiT7Jkl4YXTCoHHBtAR4BatNEvvDabbOXzzn2GQul9gn5MRTt7MjBc">
+                      <div id="content-main">
 
-                        <div class="form-group">
-                          <a type="submit" href="/admin/" class="btn btn-outline-success form-control"
-                            name="thoat">Thoát</a>
+                        <div class="module" id="changelist">
+                          <div class="row">
+                            <div class="col-12">
+
+                              <div class="row">
+                                <div class="col-12 col-sm-8">
+                                </div>
+                                <div class="col-12 col-sm-4">
+                                </div>
+                              </div>
+                              <hr>
+
+                              <div class="card">
+                                <div class="card-body table-responsive p-0">
+                                  <table id="result_list" class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=1">ID</a>
+
+                                          </div>
+                                        </th>
+
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=2">Tên nơi công tác</a>
+
+                                          </div>
+                                        </th>
+
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=3">Thời gian </a>
+
+                                          </div>
+                                        </th>
+
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=4">Địa chỉ</a>
+
+                                          </div>
+                                        </th>
+
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=5"><i class="fas fa-edit"></i>Actions</a>
+
+                                          </div>
+                                        </th>
+                                       
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {% for ct in congTac%}
+                                      <tr role="row" class="even">
+                                        <td>
+                                          {{ct.id}}
+                                        </td>
+                                        <td>{{ct.tenNoiCongTac}}</td>
+                                        <td>{{ct.thoiGian}}</td>
+                                        <td>{{ct.diaChi}}</td>
+                                        <td><a href="{% url 'tt_congtac_chitiet' ct.id %}" class="btn btn-info" >Xem chi Tiết</a></td>
+                                        
+                                      </tr>
+                                      {% endfor %}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+
+                            <div class="col-7">
+                              <ul class="pagination pagination-sm m-0 float-right">
+
+                              </ul>
+                            </div>
+
+                          </div>
                         </div>
                       </div>
-                    </div>
-
+                    </form>
                   </div>
+
                 </div>
-
-                  <script type="text/javascript" id="django-admin-form-add-constants"
-                    src="/static/admin/js/change_form.js"></script>
-
-                  <script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js"
-                    data-prepopulated-fields="[]">
-                  </script>
-
-                    </div>
-               
+                <br class="clear">
               </div>
 
             </div>
           </section>
         </div>
       </div>
-
     </div>
-
     <footer class="main-footer ">
       <div class="float-right d-none d-sm-inline">
         <b>Jazzmin version</b> 2.4.6
@@ -939,7 +870,6 @@
       <strong>Copyright © 2021 BecoStar.</strong> All rights reserved.
 
     </footer>
-
     <div id="sidebar-overlay"></div>
   </div>
 
@@ -951,10 +881,8 @@
   <script src="/static/vendor/adminlte/js/adminlte.min.js"></script>
   <!-- Django customisations -->
   <script src="/static/jazzmin/js/main.js"></script>
-
   <script type="text/javascript" src="/static/vendor/select2/js/select2.min.js"></script>
-  <script type="text/javascript" src="/static/jazzmin/js/change_form.js"></script>
-
+  <script type="text/javascript" src="/static/jazzmin/js/change_list.js"></script>
   <div id="tw_schedule_btn" class="tw-button tw-button_item"
     style="position: absolute; z-index: 8675309; display: none; cursor: pointer;"><button
       class="tw-button_item mini secondaryCTA"><em class="tw-button_item" id="schedule-button-logo"
