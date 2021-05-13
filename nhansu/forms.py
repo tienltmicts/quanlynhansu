@@ -12,3 +12,5 @@ class TinhLuongForm(forms.Form):
 class FilterForm(forms.Form):
     param = forms.CharField(widget=forms.TextInput())
     
+    
+    

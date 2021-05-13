@@ -166,3 +166,40 @@ def thongke_mucluong(request):
         'nhanVien': nvpb,
         'messages': messages
         })
+    
+def tt_banthan(request):
+    nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
+    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
+    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
+    chuyenMon = ''.join(str(cm) for cm in cmon)
+    trinhDoNN = ''.join(str(t) for t in tdnn)
+     
+    return render(request, 'admin/tt_banthan.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+
+
+def tt_thannhan(request):
+    nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
+    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
+    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
+    chuyenMon = ''.join(str(cm) for cm in cmon)
+    trinhDoNN = ''.join(str(t) for t in tdnn)
+     
+    return render(request, 'admin/tt_thannhan.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+
+def tt_congtac(request):
+    nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
+    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
+    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
+    chuyenMon = ''.join(str(cm) for cm in cmon)
+    trinhDoNN = ''.join(str(t) for t in tdnn)
+     
+    return render(request, 'admin/tt_congtac.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
+
+def tt_chuyengiaopb(request):
+    nguoiDung = get_object_or_404(NguoiDung,taikhoan=request.user)
+    cmon = ChuyenMonNhanVien.objects.filter(nhanVien=nguoiDung)
+    tdnn = TDNNNhanVien.objects.filter(nhanVien=nguoiDung)
+    chuyenMon = ''.join(str(cm) for cm in cmon)
+    trinhDoNN = ''.join(str(t) for t in tdnn)
+     
+    return render(request, 'admin/tt_chuyengiaopb.html', {'nguoiDung': nguoiDung, 'chuyenMon': chuyenMon, 'trinDoNN': trinhDoNN})
