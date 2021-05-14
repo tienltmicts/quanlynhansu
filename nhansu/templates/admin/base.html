@@ -240,14 +240,13 @@
                                                 <i class="nav-icon fas fa-circle "></i> <p>TK NVtheoPhongBan</p>
                                             </a>
                                         </li>
-                                        
-                                    {%elif group.name == 'KeToan' %}
-                                        <li class="nav-header">Thống kê</li>
                                         <li class="nav-item">
                                             <a href="{% url 'tk_luong' %}" class="nav-link">
                                                 <i class="nav-icon fas fa-circle "></i> <p>TK NVtheoLuong</p>
                                             </a>
                                         </li>
+                                    {%elif group.name == 'KeToan' %}
+            
                                         <li class="nav-header">QuanLyLuong</li>
                                         <li class="nav-item">
                                             <a href="{% url 'tinhluong' %}" class="nav-link">

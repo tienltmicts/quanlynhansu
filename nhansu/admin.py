@@ -94,11 +94,11 @@ class NhanVienKTKLAdmin(admin.ModelAdmin):
 
 admin.site.register(NhanVienKTKL, NhanVienKTKLAdmin)
 
-class PhieuLuongAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nhanVienPB', 'ngayPhat', 'tongTien')
-    search_field = ('nhanVien', 'ngayPhat')
+# class PhieuLuongAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'nhanVienPB', 'ngayPhat', 'tongTien')
+#     search_field = ('nhanVien', 'ngayPhat')
 
-admin.site.register(PhieuLuong, PhieuLuongAdmin)
+# admin.site.register(PhieuLuong, PhieuLuongAdmin)
 
 class NhanVienPhongBanAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'phongBan', 'chucVu','mucLuong','get_nvKTKL', 'get_phieuluong', 'tg_batDau', 'tg_ketThuc')

@@ -332,6 +332,8 @@
               </a>
             </li>
 
+            {%for group in user.groups.all%}
+              {%if group.name == 'Admin' %}
             <li class="nav-header">Xác thực và ủy quyền</li>
 
             <li class="nav-item">
@@ -351,7 +353,8 @@
               </a>
 
             </li>
-
+             {%endif%}
+            {%endfor%}
             <li class="nav-header">Nhansu</li>
 
             <li class="nav-item">
@@ -389,7 +392,6 @@
               </a>
 
             </li>
-
             <li class="nav-item">
 
               <a href="/admin/nhansu/nguoidung/" class="nav-link ">
@@ -455,7 +457,7 @@
 
             <li class="nav-header">Thống kê</li>
             <li class="nav-item">
-              <a href="{% url 'tk_chucvu' %}" class="nav-link">
+              <a href="{% url 'tk_chucvu' %}" class="nav-link  ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>TK NVtheoChucVu</p>
               </a>
@@ -464,6 +466,12 @@
               <a href="{% url 'tk_phongban' %}" class="nav-link active">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>TK NVtheoPhongBan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/nhansu/tk-luong/" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
               </a>
             </li>
             <li class="nav-header">ThongTinCaNhan</li>

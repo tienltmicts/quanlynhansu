@@ -748,7 +748,7 @@
 
                
               {%for group in user.groups.all%}
-                  {%if group.name == 'QuanLyNhanSu' %}
+                  {%if group.name == 'QuanLyNhanSu' or group.name == 'Admin' %}
                       <div class="card card-primary card-outline">
                           <div class="card-header">
                               <h5 class="m-0">Thống kê</h5>
@@ -774,19 +774,6 @@
                                                       class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Thống kê' %}</a></div>
                                           </td>
                                       </tr>
-                                  
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  {%elif group.name == 'KeToan' %}
-                      <div class="card card-primary card-outline">
-                          <div class="card-header">
-                              <h5 class="m-0">Thống kê</h5>
-                          </div> 
-                          <div class="card-body">
-                              <table class="table table-sm">
-                                  <tbody>
                                       <tr>
                                           <td><a href="{% url 'tk_luong' %}">TK nhân viên theo lương</a></td>
                                           <td>
@@ -800,47 +787,7 @@
                               </table>
                           </div>
                       </div>
-                      
-                  {% elif group.name == 'Admin'%}
-                      <div class="card card-primary card-outline">
-                          <div class="card-header">
-                              <h5 class="m-0">Thống kê</h5>
-                          </div> 
-                          <div class="card-body">
-                              <table class="table table-sm">
-                                  <tbody>
-                                      <tr>
-                                          <td><a href="{% url 'tk_chucvu' %}">TK nhân viên theo chức vụ</a></td>
-                                          <td>
-                                              <div class="btn-group float-right">
-                                                  <a href="{% url 'tk_chucvu' %}"
-                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a></div>
-
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td><a href="{% url 'tk_phongban' %}">TK nhân viên theo phòng ban</a></td>
-                                          <td>
-                                              <div class="btn-group float-right">
-
-                                                  <a href="{% url 'tk_phongban' %}"
-                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Thống kê' %}</a></div>
-                                          </td>
-                                      </tr>
-                                      <tr>
-                                          <td><a href="{% url 'tk_luong' %}">TK nhân viên theo lương</a></td>
-                                          <td>
-                                              <div class="btn-group float-right">
-                                                  <a href="{% url 'tk_luong' %}"
-                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a>
-
-                                          </td>
-                                      </tr>
-                                  </tbody>
-                              </table>
-                          </div> 
-                      </div>
-                    
+                  
                 {%endif%}
             {%endfor%}
 

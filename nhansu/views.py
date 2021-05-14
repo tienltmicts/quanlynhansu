@@ -39,6 +39,7 @@ def quanly_luong(request):
 def wage_total(request):
     nvpb = []
     nhanVienPB = NhanVienPhongBan.objects.all()
+    messages = ''
     for nv in nhanVienPB:
         nvpb.append({'id': nv.id , 'nv': str(nv)})
     if request.method == 'POST':
@@ -59,10 +60,10 @@ def wage_total(request):
                 tongTien=tong
             )
             phieuLuong.save()
-            return HttpResponseRedirect('/nhansu/bangluong')        
+            messages = 'Bạn đã tính lương thành công!'       
     else:
         form = TinhLuongForm()       
-    return render(request, "admin/tinhluong.html",{'form': form, 'nhanVienPB': nvpb})
+    return render(request, "admin/tinhluong.html",{'form': form, 'nhanVienPB': nvpb, 'messages': messages})
 
 def bangluong(request):
     bangLuong = []
@@ -70,11 +71,11 @@ def bangluong(request):
         bangLuong.append(i)
     return render(request, "admin/bangluong.html", {'bangluong': bangLuong})  
 
-def xoa_hangbangluong(request, id):
-    pl = get_object_or_404(PhieuLuong,id=id)
-    pl.delete()
-    messages.success(request, 'Xoá thành công!')
-    return HttpResponseRedirect('/nhansu/bangluong')
+# def xoa_hangbangluong(request, id):
+#     pl = get_object_or_404(PhieuLuong,id=id)
+#     pl.delete()
+#     messages.success(request, 'Xoá thành công!')
+#     return HttpResponseRedirect('/nhansu/bangluong')
     
 def thongke(request):
     return  render(request, 'admin/thongke.html')

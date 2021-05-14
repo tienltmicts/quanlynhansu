@@ -332,51 +332,148 @@
               </a>
             </li>
 
+            {%for group in user.groups.all%}
+              {%if group.name == 'Admin' %}
+            <li class="nav-header">Xác thực và ủy quyền</li>
+
             <li class="nav-item">
 
-              <a href="/admin/nhansu/khenthuongkyluat/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>KhenThuongKyLuat</p>
+              <a href="/admin/auth/group/" class="nav-link">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Các nhóm</p>
               </a>
 
             </li>
 
             <li class="nav-item">
 
-              <a href="/admin/nhansu/mucluong/" class="nav-link">
+              <a href="/admin/auth/user/" class="nav-link">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Người sử dụng</p>
+              </a>
+
+            </li>
+             {%endif%}
+            {%endfor%}
+            <li class="nav-header">Nhansu</li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/chucvu/" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
-                <p>MucLuong</p>
+                <p>ChucVu</p>
               </a>
 
             </li>
 
             <li class="nav-item">
 
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
+              <a href="/admin/nhansu/chuyenmon/" class="nav-link">
                 <i class="nav-icon fas fa-circle"></i>
-                <p>PhieuLuong</p>
+                <p>ChuyenMon</p>
               </a>
 
             </li>
 
-            
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/chuyenmonnhanvien/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>ChuyenMonNhanVien</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/lylichcongtac/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>LyLichCongTac</p>
+              </a>
+
+            </li>
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/nguoidung/" class="nav-link ">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>NguoiDung</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/nhanvienktkl/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>NhanVienKTKL</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/nhanvienphongban/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>NhanVienPhongBan</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/phongban/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>PhongBan</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/tdnnnhanvien/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>TDNNNhanVien</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/thannhan/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>ThanNhan</p>
+              </a>
+
+            </li>
+
+            <li class="nav-item">
+
+              <a href="/admin/nhansu/trinhdongoaingu/" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p>TrinhDoNgoaiNgu</p>
+              </a>
+
+            </li>
+
             <li class="nav-header">Thống kê</li>
-              <li class="nav-item">
-                  <a href="{% url 'tk_luong' %}" class="nav-link active">
-                      <i class="nav-icon fas fa-circle "></i> <p>TK NVtheoLuong</p>
-                  </a>
-              </li>
-              <li class="nav-header">QuanLyLuong</li>
-              <li class="nav-item">
-                  <a href="{% url 'tinhluong' %}" class="nav-link">
-                      <i class="nav-icon fas fa-circle "></i> <p>TinhLuong</p>
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a href="{% url 'bangluong' %}" class="nav-link">
-                      <i class="nav-icon fas fa-circle "></i> <p>BangLuong</p>
-                  </a>
-              </li>
+            <li class="nav-item">
+              <a href="{% url 'tk_chucvu' %}" class="nav-link ">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoChucVu</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'tk_phongban' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoPhongBan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/nhansu/tk-luong/" class="nav-link active">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
+              </a>
+            </li>
               <li class="nav-header">ThongTinCaNhan</li>
             <li class="nav-item">
               <a href="{% url 'tt_banthan' %}" class="nav-link ">

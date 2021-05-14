@@ -449,6 +449,13 @@
                 <p>TK NVtheoPhongBan</p>
               </a>
             <li>
+            
+            <li class="nav-item">
+              <a href="{% url 'tk_luong' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
+              </a>
+            </li>
               {%elif group.name == 'KeToan' %}
             <li class="nav-item">
 
@@ -468,21 +475,6 @@
 
             </li>
 
-            <li class="nav-item">
-
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>PhieuLuong</p>
-              </a>
-
-            </li>
-            <li class="nav-header">Thống kê</li>
-            <li class="nav-item">
-              <a href="{% url 'tk_luong' %}" class="nav-link">
-                <i class="nav-icon fas fa-circle "></i>
-                <p>TK NVtheoLuong</p>
-              </a>
-            </li>
             <li class="nav-header">QuanLyLuong</li>
             <li class="nav-item">
               <a href="{% url 'tinhluong' %}" class="nav-link ">
@@ -838,7 +830,7 @@
                         </div>
 
                         <div class="form-group">
-                          <a type="submit" href="/admin/" class="btn btn-outline-info form-control"
+                          <a type="submit" href="{% url 'tt_canhan' %}" class="btn btn-outline-info form-control"
                             name="thoat">Thoát</a>
                         </div>
                       </div>

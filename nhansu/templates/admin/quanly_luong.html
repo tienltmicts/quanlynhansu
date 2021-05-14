@@ -451,6 +451,13 @@
                 <p>TK NVtheoPhongBan</p>
               </a>
             <li>
+            
+            <li class="nav-item">
+              <a href="{% url 'tk_luong' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
+              </a>
+            </li>
               {%elif group.name == 'KeToan' %}
             <li class="nav-item">
 
@@ -468,22 +475,6 @@
                 <p>MucLuong</p>
               </a>
 
-            </li>
-
-            <li class="nav-item">
-
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>PhieuLuong</p>
-              </a>
-
-            </li>
-            <li class="nav-header">Thống kê</li>
-            <li class="nav-item">
-              <a href="{% url 'tk_luong' %}" class="nav-link">
-                <i class="nav-icon fas fa-circle "></i>
-                <p>TK NVtheoLuong</p>
-              </a>
             </li>
             <li class="nav-header">QuanLyLuong</li>
             <li class="nav-item">
@@ -601,16 +592,6 @@
               </a>
 
             </li>
-
-            <li class="nav-item">
-
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>Phiếu Lương</p>
-              </a>
-
-            </li>
-
             <li class="nav-item">
 
               <a href="/admin/nhansu/phongban/" class="nav-link">
@@ -760,10 +741,9 @@
                                         <td><a href="{% url 'bangluong' %}">Bảng lương</a></td>
                                         <td>
                                             <div class="btn-group float-right">
-                                                <a href="{% url 'tinhluong' %}"
-                                                    class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
+                                    
                                                 <a href="{% url 'bangluong' %}"
-                                                    class="btn btn-sm {{ jazzmin_ui.button_classes.info }} btn-flat viewlink">{% trans 'Xem' %}</a>
+                                                    class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Xem' %}</a>
                                             </div>
                                         </td>
                                     </tr>

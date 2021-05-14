@@ -451,6 +451,12 @@
                 <p>TK NVtheoPhongBan</p>
               </a>
             <li>
+            <li class="nav-item">
+              <a href="{% url 'tk_luong' %}" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
+              </a>
+            </li>
               {%elif group.name == 'KeToan' %}
             <li class="nav-item">
 
@@ -470,20 +476,7 @@
 
             </li>
 
-            <li class="nav-item">
 
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>PhieuLuong</p>
-              </a>
-
-            </li>
-            <li class="nav-header">Thống kê</li>
-            <li class="nav-item">
-              <a href="{% url 'tk_luong' %}" class="nav-link">
-                <i class="nav-icon fas fa-circle "></i>
-                <p>TK NVtheoLuong</p>
-              </a>
             </li>
             <li class="nav-header">QuanLyLuong</li>
             <li class="nav-item">
@@ -601,16 +594,6 @@
               </a>
 
             </li>
-
-            <li class="nav-item">
-
-              <a href="/admin/nhansu/phieuluong/" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
-                <p>Phiếu Lương</p>
-              </a>
-
-            </li>
-
             <li class="nav-item">
 
               <a href="/admin/nhansu/phongban/" class="nav-link">

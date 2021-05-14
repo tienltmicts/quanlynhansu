@@ -330,7 +330,8 @@
                 <p>Dashboard</p>
               </a>
             </li>
-
+            {%for group in user.groups.all%}
+              {%if group.name == 'Admin' %}
             <li class="nav-header">Xác thực và ủy quyền</li>
 
             <li class="nav-item">
@@ -350,7 +351,8 @@
               </a>
 
             </li>
-
+             {%endif%}
+            {%endfor%}
             <li class="nav-header">Nhansu</li>
 
             <li class="nav-item">
@@ -463,6 +465,13 @@
                 <i class="nav-icon fas fa-circle "></i>
                 <p>TK NVtheoPhongBan</p>
               </a>
+            </li>
+            <li class="nav-item">
+              <a href="/nhansu/tk-luong/" class="nav-link">
+                <i class="nav-icon fas fa-circle "></i>
+                <p>TK NVtheoLuong</p>
+              </a>
+            </li>
             <li class="nav-header">ThongTinCaNhan</li>
             <li class="nav-item">
               <a href="{% url 'tt_banthan' %}" class="nav-link ">
