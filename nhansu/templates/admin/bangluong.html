@@ -391,7 +391,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'tt_congtac' %}" class="nav-link active">
+              <a href="{% url 'tt_congtac' %}" class="nav-link ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>ThongTinCongTac</p>
               </a>
@@ -418,7 +418,7 @@
 
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i> Trang chủ</a></li>
-                <li class="breadcrumb-item"><a href="#">QuanLyLuong</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'quanly_luong' %}">QuanLyLuong</a></li>
                 <li class="breadcrumb-item active">BangLuong</li>
               </ol>
 
@@ -458,24 +458,6 @@
 
                               <div class="row">
                                 <div class="col-12 col-sm-8">
-
-                                  {% comment %} <div class="actions">
-
-                                    <label><select name="action" required="" class="form-control">
-                                        <option value="" selected="">---------</option>
-
-                                        <option value="delete_selected">Xóa các bảng lương đã chọn</option>
-
-                                      </select></label><label><input type="hidden" name="select_across" value="0"
-                                        class="select-across"></label>
-
-                                    <button type="submit" class="btn btn-outline-primary"
-                                      style="margin-right: 5px; margin-left: 15px;" title="Bắt đầu hành động lựa chọn"
-                                      name="index" value="0">
-                                      Đi
-                                    </button>
-                                  </div> {% endcomment %}
-
                                 </div>
                                 <div class="col-12 col-sm-4">
 

@@ -1,11 +1,13 @@
 <html lang="vi" style="height: auto;">
+{% load i18n static jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Thông tin Nhân viên | Công ty BeCoStar</title>
+  <title>Thống kê | Công ty BeCoStar</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/static/vendor/fontawesome-free/css/all.min.css">
@@ -434,7 +436,7 @@
                 <p>TrinhDoNgoaiNgu</p>
               </a>
 
-            </li>
+            </li> 
 
             <li class="nav-header">Thống kê</li>
             <li class="nav-item">
@@ -485,7 +487,7 @@
             </li>
             <li class="nav-header">QuanLyLuong</li>
             <li class="nav-item">
-              <a href="{% url 'tinhluong' %}" class="nav-link">
+              <a href="{% url 'tinhluong' %}" class="nav-link ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>TinhLuong</p>
               </a>
@@ -645,7 +647,7 @@
 
             </li>
 
-            <li class="nav-header">Thống kê</li>
+            <li class="nav-header ">Thống kê</li>
             <li class="nav-item">
               <a href="/nhansu/tk-chucvu/" class="nav-link">
                 <i class="nav-icon fas fa-circle "></i>
@@ -693,7 +695,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{% url 'tt_congtac' %}" class="nav-link active">
+              <a href="{% url 'tt_congtac' %}" class="nav-link ">
                 <i class="nav-icon fas fa-circle "></i>
                 <p>ThongTinCongTac</p>
               </a>
@@ -723,10 +725,10 @@
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i> Trang
                     chủ</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'tt_canhan' %}">ThongTinCaNhan</a></li>
+
                 <li class="breadcrumb-item active">
 
-                  ThongTinCongTac
+                  ThongKe
 
                 </li>
               </ol>
@@ -742,135 +744,126 @@
 
             <div class="row">
 
-              <div class="col-12">
-                <div class="card card-primary card-outline">
-                  <div class="card-header">
-                    <h4 class="card-title">Thông tin công tác</h4>
-                    <div class="card-tools form-inline">
+              <div class="col-md-6 col-sm-12">
 
-                      <form id="changelist-search" class="form-inline mt-2" method="GET">
-
-                      </form>
-
-                    </div>
-                  </div>
-
-                  <div class="card-body">
-                    <form id="changelist-form" method="post" novalidate=""><input type="hidden"
-                        name="csrfmiddlewaretoken"
-                        value="F94loZBkUBqiT7Jkl4YXTCoHHBtAR4BatNEvvDabbOXzzn2GQul9gn5MRTt7MjBc">
-                      <div id="content-main">
-
-                        <div class="module" id="changelist">
-                          <div class="row">
-                            <div class="col-12">
-
-                              <div class="row">
-                                <div class="col-12 col-sm-8">
-                                </div>
-                                <div class="col-12 col-sm-4">
-                                </div>
-                              </div>
-                              <hr>
-
-                              <div class="card">
-                                <div class="card-body table-responsive p-0">
-                                  <table id="result_list" class="table table-striped">
-                                    <thead>
+               
+              {%for group in user.groups.all%}
+                  {%if group.name == 'QuanLyNhanSu' %}
+                      <div class="card card-primary card-outline">
+                          <div class="card-header">
+                              <h5 class="m-0">Thống kê</h5>
+                          </div>      
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <tbody>
                                       <tr>
-                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
+                                          <td><a href="{% url 'tk_chucvu' %}">TK nhân viên theo chức vụ</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+                                                  <a href="{% url 'tk_chucvu' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a></div>
 
-                                            <a href="?o=1">ID</a>
-
-                                          </div>
-                                        </th>
-
-                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
-
-                                            <a href="?o=2">Tên nơi công tác</a>
-
-                                          </div>
-                                        </th>
-
-                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
-
-                                            <a href="?o=3">Thời gian </a>
-
-                                          </div>
-                                        </th>
-
-                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
-
-                                            <a href="?o=4">Địa chỉ</a>
-
-                                          </div>
-                                        </th>
-
-                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                          <div class="text">
-
-                                            <a href="?o=5"><i class="fas fa-edit"></i>Actions</a>
-
-                                          </div>
-                                        </th>
-                                       
+                                          </td>
                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                      {% for ct in congTac%}
-                                      <tr role="row" class="even">
-                                        <td>
-                                          {{ct.id}}
-                                        </td>
-                                        <td>{{ct.tenNoiCongTac}}</td>
-                                        <td>{{ct.thoiGian}}</td>
-                                        <td>{{ct.diaChi}}</td>
-                                        <td><a href="{% url 'tt_congtac_chitiet' ct.id %}" class="btn btn-info" >Xem chi Tiết</a></td>
-                                        
+                                      <tr>
+                                          <td><a href="{% url 'tk_phongban' %}">TK nhân viên theo phòng ban</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+
+                                                  <a href="{% url 'tk_phongban' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Thống kê' %}</a></div>
+                                          </td>
                                       </tr>
-                                      {% endfor %}
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
+                                  
+                                  </tbody>
+                              </table>
                           </div>
-                          <div class="row">
-
-                            <div class="col-7">
-                              <ul class="pagination pagination-sm m-0 float-right">
-
-                              </ul>
-                            </div>
-
-                          </div>
-                        </div>
                       </div>
-                    </form>
-                  </div>
+                  {%elif group.name == 'KeToan' %}
+                      <div class="card card-primary card-outline">
+                          <div class="card-header">
+                              <h5 class="m-0">Thống kê</h5>
+                          </div> 
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <tbody>
+                                      <tr>
+                                          <td><a href="{% url 'tk_luong' %}">TK nhân viên theo lương</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+                                                  <a href="{% url 'tk_luong' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a>
 
-                </div>
-                <br class="clear">
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                      
+                  {% elif group.name == 'Admin'%}
+                      <div class="card card-primary card-outline">
+                          <div class="card-header">
+                              <h5 class="m-0">Thống kê</h5>
+                          </div> 
+                          <div class="card-body">
+                              <table class="table table-sm">
+                                  <tbody>
+                                      <tr>
+                                          <td><a href="{% url 'tk_chucvu' %}">TK nhân viên theo chức vụ</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+                                                  <a href="{% url 'tk_chucvu' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a></div>
+
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td><a href="{% url 'tk_phongban' %}">TK nhân viên theo phòng ban</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+
+                                                  <a href="{% url 'tk_phongban' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat viewlink">{% trans 'Thống kê' %}</a></div>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td><a href="{% url 'tk_luong' %}">TK nhân viên theo lương</a></td>
+                                          <td>
+                                              <div class="btn-group float-right">
+                                                  <a href="{% url 'tk_luong' %}"
+                                                      class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Thống kê' %}</a>
+
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div> 
+                      </div>
+                    
+                {%endif%}
+            {%endfor%}
+
               </div>
+              <br class="clear">
 
             </div>
-          </section>
+
         </div>
+        </section>
       </div>
     </div>
-    <footer class="main-footer ">
-      <div class="float-right d-none d-sm-inline">
-        <b>Jazzmin version</b> 2.4.6
-      </div>
+  </div>
 
-      <strong>Copyright © 2021 BecoStar.</strong> All rights reserved.
+  <footer class="main-footer ">
+    <div class="float-right d-none d-sm-inline">
+      <b>Jazzmin version</b> 2.4.6
+    </div>
 
-    </footer>
-    <div id="sidebar-overlay"></div>
+    <strong>Copyright © 2021 BecoStar.</strong> All rights reserved.
+
+  </footer>
+  <div id="sidebar-overlay"></div>
   </div>
 
   <!-- jQuery -->

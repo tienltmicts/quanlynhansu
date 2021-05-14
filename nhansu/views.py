@@ -32,6 +32,9 @@ def user_login(request):
 
     return render(request, 'login.html', {'form': form, 'messages': messages})
 
+def quanly_luong(request):
+    return render(request, 'admin/quanly_luong.html')
+
 @staff_member_required
 def wage_total(request):
     nvpb = []
@@ -72,6 +75,9 @@ def xoa_hangbangluong(request, id):
     pl.delete()
     messages.success(request, 'Xoá thành công!')
     return HttpResponseRedirect('/nhansu/bangluong')
+    
+def thongke(request):
+    return  render(request, 'admin/thongke.html')
     
 def thongke_phongban(request):
     nvpb = []
