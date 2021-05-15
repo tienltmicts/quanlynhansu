@@ -1,1 +1,1 @@
-web: gunicorn quanlynhansu.wsgi
+web: gunicorn becostar.wsgi

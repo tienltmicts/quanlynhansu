@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-#eeh2*6g1(%eljheq2gdp$txkbf_^!=iwk*pq0k=)6&9tako@h
 DEBUG = True
 
 ALLOWED_HOSTS = ["becostar.herokuapp.com"]
+WSGI_APPLICATION = 'becostar.wsgi.application'
 
 
 # Application definition
