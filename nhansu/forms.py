@@ -11,6 +11,7 @@ class TinhLuongForm(forms.Form):
     
 class FilterForm(forms.Form):
     param = forms.CharField(widget=forms.TextInput())
+    tg_batDau = forms.DateField(widget=forms.DateInput(attrs={'class': 'vDateFfield'}))
     
 class ThanNhanForm(forms.Form):   
     hoVaTen = forms.CharField(widget=forms.TextInput(attrs={

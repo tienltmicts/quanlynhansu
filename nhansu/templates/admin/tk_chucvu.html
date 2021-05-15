@@ -1,4 +1,6 @@
 <html lang="vi" style="height: auto;">
+{% load i18n static jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
 
 <head>
   <meta charset="utf-8">
@@ -531,7 +533,7 @@
               <div class="col-12">
                 <div class="card card-primary card-outline">
                   <div class="card-header">
-                    <h4 class="card-title">Chọn Chức vụ để thống kê</h4>
+                    <h4 class="card-title">Chọn Chức vụ và thời gian  để thống kê</h4>
                     <div class="card-tools form-inline">
 
                       <form id="changelist-search" class="form-inline mt-2" method="GET">
@@ -553,12 +555,12 @@
 
                               <div class="row">
                                 
-                                <div class="col-12 col-sm-8">
+                                <div class="col-12 col-sm-8 ">
                                     <form method="GET" action="{% url 'tk_chucvu' %}" >
-                                  <div class="actions">
-
+                                  <div class="actions d-flex">
+                                    <div class=" col-sm-3">
                                     <label><select name="param" required="" class="form-control">
-                                        <option value="" selected="" data-select2-id="select2-data-2-ecfv">---------
+                                        <option value="" selected="" data-select2-id="select2-data-2-ecfv">Chức vụ
                                         {% for k in filter %}
                                             {% if k == query_string %}
                                             <option value="{{k}}" selected>{{k}}</option>
@@ -567,10 +569,15 @@
                                             {% endif %}
                                             {% endfor %}
                                       </select></label><label><input type="hidden" name="select_across" value="0"
-                                        class="select-across"></label>
-
-                                    <button type="submit" class="btn btn-outline-primary"
-                                      style="margin-right: 5px; margin-left: 15px;" 
+                                        class="select-across"></label></div>
+                                    <div class=" col-sm-4 ">
+                                        <input type="text" name="tg_batDau" placeholder="Thời gian bắt đầu" value="{{tg_batDau}}" class="vDateField form-control" size="10" id="id_ngaySinh">
+                                    </div>
+                                    <div class=" col-sm-4  ">
+                                        <input type="text" name="tg_ketThuc" placeholder="Thời gian kết thúc" value="{{tg_ketThuc}}" class="vDateField form-control" size="10" id="id_ngaySinh">
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-primary "
+                                      style="margin-right: 5px; margin-left: 15px; height: 38px" 
                                       name="index" value="0">
                                       Đi
                                     </button>
@@ -580,7 +587,9 @@
                                 
                               </div>
                               <hr>
-
+                              {% if messages %}
+                                <p class="text-red">{{ messages }}</p>
+                              {% endif %}
                               <div class="card">
                                 <div class="card-body table-responsive p-0">
                                   <table id="result_list" class="table table-striped">

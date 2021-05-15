@@ -86,16 +86,23 @@ def thongke_phongban(request):
     filters = []
     query_string = 0
     nhanVien=''
+    tg_batDau = ''
+    tg_ketThuc = ''
+    messages = ''
     for pb in phongBan:
         filters.append(pb.tenPhongBan)
     if request.method == 'GET':
         form = FilterForm(request.GET)
         if form.is_valid():
             query_string=request.GET['param']
+            tg_batDau = request.GET['tg_batDau']
+            tg_ketThuc = request.GET['tg_ketThuc']
             pB = get_object_or_404(PhongBan,tenPhongBan=query_string)
-            nhanVien = NhanVienPhongBan.objects.filter(phongBan=pb)
+            nhanVien = NhanVienPhongBan.objects.filter(phongBan=pB,tg_batDau__gt=tg_batDau, tg_ketThuc__lt=tg_ketThuc).order_by('tg_batDau')
             for nv in nhanVien:
                 nvpb.append(nv)
+            if nvpb == []:
+                messages = 'Không có nhân viên nào ở phòng ban này trong khoảng thời gian trên!'
     else:
         form = FilterForm()
 
@@ -103,7 +110,8 @@ def thongke_phongban(request):
         'form': form,
         'filter': filters,
         'query_string': query_string,
-        'nhanVien': nvpb
+        'nhanVien': nvpb,
+        'messages': messages
         })
     
 def thongke_chucvu(request):
@@ -111,18 +119,25 @@ def thongke_chucvu(request):
     chucVu = ChucVu.objects.all()
     filters = []
     query_string = ''
-    nhanVien=''
+    nhanVien = ''
+    tg_batDau = ''
+    tg_ketThuc = ''
+    messages = ''
     for cv in chucVu:
         filters.append(cv.tenChucVu)
     if request.method == 'GET':
         form = FilterForm(request.GET)
         if form.is_valid():
-            query_string=request.GET['param']
+            query_string = request.GET['param']
+            tg_batDau = request.GET['tg_batDau']
+            tg_ketThuc = request.GET['tg_ketThuc']
             
             cV = get_object_or_404(ChucVu,tenChucVu=query_string)
-            nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV)
+            nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV,tg_batDau__gt=tg_batDau, tg_ketThuc__lt=tg_ketThuc).order_by('tg_batDau')
             for nv in nhanVien:
                 nvpb.append(nv)
+            if nvpb == []:
+                messages = 'Không có nhân viên nào làm chức vụ này trong khoảng thời gian trên!'
     else:
         form = FilterForm()
 
@@ -130,7 +145,10 @@ def thongke_chucvu(request):
         'form': form,
         'filter': filters,
         'query_string': query_string,
-        'nhanVien': nvpb
+        'nhanVien': nvpb,
+        'tg_batDau': tg_batDau,
+        'tg_ketThuc': tg_ketThuc,
+        'messages': messages
         })
     
 def thongke_mucluong(request):
@@ -140,10 +158,14 @@ def thongke_mucluong(request):
     nhanVien=''
     mucLuong = ''
     messages = ''
+    tg_batDau = ''
+    tg_ketThuc = ''
     if request.method == 'GET':
         form = FilterForm(request.GET)
         if form.is_valid():
             query_string=request.GET['param']
+            tg_batDau = request.GET['tg_batDau']
+            tg_ketThuc = request.GET['tg_ketThuc']
             if query_string == 'Dưới 5 triệu':
                 mucLuong = MucLuong.objects.filter(soTien__lt=5000000).order_by('-soTien')
             elif query_string == 'Từ 5-10 triệu':
@@ -158,7 +180,7 @@ def thongke_mucluong(request):
                 mucLuong = MucLuong.objects.filter(soTien__gt=30000000).order_by('-soTien')
                
             for ml in mucLuong:
-                nhanVien = NhanVienPhongBan.objects.filter(mucLuong=ml)
+                nhanVien = NhanVienPhongBan.objects.filter(mucLuong=ml,tg_batDau__gt=tg_batDau, tg_ketThuc__lt=tg_ketThuc).order_by('tg_batDau')
                 for nv in nhanVien:
                     nvpb.append(nv)
             if nvpb == []:

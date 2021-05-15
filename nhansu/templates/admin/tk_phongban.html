@@ -557,8 +557,8 @@
                                 
                                 <div class="col-12 col-sm-8">
                                     <form method="GET" action="{% url 'tk_phongban' %}" >
-                                  <div class="actions">
-
+                                  <div class="actions d-flex">
+                                    <div class="col-sm-3">
                                     <label><select name="param" required="" class="form-control">
                                         <option value="" selected="" data-select2-id="select2-data-2-ecfv">---------
                                         {% for k in filter %}
@@ -569,7 +569,13 @@
                                             {% endif %}
                                             {% endfor %}
                                       </select></label><label><input type="hidden" name="select_across" value="0"
-                                        class="select-across"></label>
+                                        class="select-across"></label></div>
+                                      <div class=" col-sm-4 ">
+                                        <input type="text" name="tg_batDau" placeholder="Thời gian bắt đầu" value="{{tg_batDau}}" class="vDateField form-control" size="10" id="id_ngaySinh">
+                                      </div>
+                                      <div class=" col-sm-4  ">
+                                          <input type="text" name="tg_ketThuc" placeholder="Thời gian kết thúc" value="{{tg_ketThuc}}" class="vDateField form-control" size="10" id="id_ngaySinh">
+                                      </div>
 
                                     <button type="submit" class="btn btn-outline-primary"
                                       style="margin-right: 5px; margin-left: 15px;" 
