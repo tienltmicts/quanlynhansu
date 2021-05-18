@@ -24,7 +24,7 @@ admin.site.register(PhongBan, PhongBanAdmin)
 
 class KhenThuongKyLuatAdmin(admin.ModelAdmin):
     list_display = ('id', 'maKTKL', 'tenKTKL', 'hinhthucKTKL', 'soTienKTKL', 'laKT')
-    search_fields = ['maKTKL','tenKTKL']
+    search_fields = ['maKTKL','tenKTKL','id']
 
 admin.site.register(KhenThuongKyLuat, KhenThuongKyLuatAdmin)
 
@@ -36,7 +36,7 @@ admin.site.register(ChuyenMon, ChuyenMonAdmin)
 
 class TrinhDoNgoaiNguAdmin(admin.ModelAdmin):
     list_display = ('id', 'loaiNgonNgu')
-    search_fields = ['loaiNgonNgu']
+    search_fields = ['loaiNgonNgu','id']
 
 admin.site.register(TrinhDoNgoaiNgu, TrinhDoNgoaiNguAdmin)
 
@@ -49,7 +49,7 @@ admin.site.register(ThanNhan, ThanNhanAdmin)
 class NguoiDungAdmin(admin.ModelAdmin):
     fields = ['taikhoan', 'hoVaTen', 'diaChi', 'email', 'ngaySinh', 'soDienThoai',  'thanNhan', 'trangThaiLamViec']
     list_display = ('id','taikhoan', 'hoVaTen', 'diaChi', 'email', 'ngaySinh', 'soDienThoai', 'get_hosolylich', 'get_chuyenmon','get_tdnn', 'get_thannhan', 'trangThaiLamViec' )
-    search_fields = ['hoVaTen', 'taikhoan','id']
+    search_fields = ['hoVaTen','id']
     def get_hosolylich(self,obj):
         hoSoLyLich  = LyLichCongTac.objects.filter(nhanVien=obj)
         return mark_safe("<br/>".join([str(m) for m in hoSoLyLich]))
@@ -73,7 +73,7 @@ admin.site.register(NguoiDung, NguoiDungAdmin)
 
 class LyLichCongTacAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'tenNoiCongTac', 'thoiGian', 'diaChi')
-    search_fields = ['id','tenNoiCongTac', 'thoiGian', 'diaChi']
+    search_fields = ['id','tenNoiCongTac','diaChi']
 
 admin.site.register(LyLichCongTac, LyLichCongTacAdmin)
 
@@ -91,7 +91,7 @@ admin.site.register(ChuyenMonNhanVien, ChuyenMonNhanVienAdmin)
 
 class NhanVienKTKLAdmin(admin.ModelAdmin):
     list_display = ('id',  'thoiGian')
-    search_fields = ['nhanVien', 'ktkl']
+    search_fields = ['id']
 
 admin.site.register(NhanVienKTKL, NhanVienKTKLAdmin)
 
@@ -103,7 +103,7 @@ admin.site.register(NhanVienKTKL, NhanVienKTKLAdmin)
 
 class NhanVienPhongBanAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'phongBan', 'chucVu','mucLuong','get_nvKTKL', 'get_phieuluong', 'tg_batDau', 'tg_ketThuc')
-    search_fields = ['id','tg_batDau', 'tg_ketThuc']
+    search_fields = ['id']
     def get_nvKTKL(self, obj):
         nvKTKL  = NhanVienKTKL.objects.filter(nhanVienPB=obj)
         return mark_safe("<br/>".join([str(m) for m in nvKTKL]))
