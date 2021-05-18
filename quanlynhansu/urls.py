@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from nhansu import views
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('nhansu/', include('nhansu.urls')),
     path('',views.user_login, name="login" ),
 ]
+
+
+urlpatterns += [url(r'^i18n/', include('django.conf.urls.i18n')),]
+urlpatterns += i18n_patterns(url(r'^admin/', admin.site.urls))

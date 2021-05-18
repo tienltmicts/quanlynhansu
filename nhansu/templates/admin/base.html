@@ -124,7 +124,7 @@
                             <i class="fas fa-globe pr-2" aria-hidden="true"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left" id="jazzy-languagemenu">
-                            {% comment %} <form action="{% url 'set_language' %}" method="post">
+                            <form action="{% url 'set_language' %}" method="post">
                                 {% csrf_token %}
                                 <input name="next" type="hidden" value="{{ request.get_full_path|remove_lang:LANGUAGE_CODE }}" />
                                 {% for language in languages %}
@@ -138,7 +138,7 @@
                                         {{ language.name_local|title }}
                                     </button>
                                 {% endfor %}
-                            </form> {% endcomment %}
+                            </form> 
                         </div>
                     </li>
                 {% endif %}

@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
+from django.contrib.admin.views import main
 
 class ChucVuAdmin(admin.ModelAdmin):
     list_display = ('id', 'tenChucVu', 'baoHiem', 'troCap',)
@@ -114,3 +115,8 @@ class NhanVienPhongBanAdmin(admin.ModelAdmin):
     get_phieuluong.short_description = 'Phiếu lương'
     
 admin.site.register(NhanVienPhongBan, NhanVienPhongBanAdmin)
+
+class MyModelAdmin(admin.ModelAdmin):
+    def __init__(self,*args,**kwargs):
+        super(MyModelAdmin, self).__init__(*args, **kwargs)
+        main.EMPTY_CHANGELIST_VALUE = '-'
