@@ -6,50 +6,50 @@ from django.contrib.admin.views import main
 
 class ChucVuAdmin(admin.ModelAdmin):
     list_display = ('id', 'tenChucVu', 'baoHiem', 'troCap',)
-    search_field = ('tenChucVu')
+    search_fields = ['id', 'tenChucVu']
 
 admin.site.register(ChucVu, ChucVuAdmin)
 
 class MucLuongAdmin(admin.ModelAdmin):
     list_display = ('id', 'maMucLuong', 'soTien',)
-    search_field = ('maMucLuong')
+    search_fields = ['maMucLuong','id']
 
 admin.site.register(MucLuong, MucLuongAdmin)
 
 class PhongBanAdmin(admin.ModelAdmin):
     list_display = ('id', 'maPhongBan', 'tenPhongBan', 'diaChi',)
-    search_field = ('tenPhongBan')
+    search_fields = ['tenPhongBan','id']
 
 admin.site.register(PhongBan, PhongBanAdmin)
 
 class KhenThuongKyLuatAdmin(admin.ModelAdmin):
     list_display = ('id', 'maKTKL', 'tenKTKL', 'hinhthucKTKL', 'soTienKTKL', 'laKT')
-    search_field = ('maKTKL')
+    search_fields = ['maKTKL','tenKTKL']
 
 admin.site.register(KhenThuongKyLuat, KhenThuongKyLuatAdmin)
 
 class ChuyenMonAdmin(admin.ModelAdmin):
     list_display = ('id', 'tenChuyenMon')
-    search_field = ('tenChuyenMon')
+    search_fields = ['tenChuyenMon','id']
 
 admin.site.register(ChuyenMon, ChuyenMonAdmin)
 
 class TrinhDoNgoaiNguAdmin(admin.ModelAdmin):
     list_display = ('id', 'loaiNgonNgu')
-    search_field = ('loaiNgonNgu')
+    search_fields = ['loaiNgonNgu']
 
 admin.site.register(TrinhDoNgoaiNgu, TrinhDoNgoaiNguAdmin)
 
 class ThanNhanAdmin(admin.ModelAdmin):
     list_display = ('id', 'hoVaTen', 'diaChi', 'soDienThoai', 'quanHe')
-    search_field = ('hoVaTen')
+    search_fields = ['hoVaTen', 'id']
 
 admin.site.register(ThanNhan, ThanNhanAdmin)
 
 class NguoiDungAdmin(admin.ModelAdmin):
     fields = ['taikhoan', 'hoVaTen', 'diaChi', 'email', 'ngaySinh', 'soDienThoai',  'thanNhan', 'trangThaiLamViec']
     list_display = ('id','taikhoan', 'hoVaTen', 'diaChi', 'email', 'ngaySinh', 'soDienThoai', 'get_hosolylich', 'get_chuyenmon','get_tdnn', 'get_thannhan', 'trangThaiLamViec' )
-    search_field = ('hoVaTen', 'taikhoan')
+    search_fields = ['hoVaTen', 'taikhoan','id']
     def get_hosolylich(self,obj):
         hoSoLyLich  = LyLichCongTac.objects.filter(nhanVien=obj)
         return mark_safe("<br/>".join([str(m) for m in hoSoLyLich]))
@@ -73,25 +73,25 @@ admin.site.register(NguoiDung, NguoiDungAdmin)
 
 class LyLichCongTacAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'tenNoiCongTac', 'thoiGian', 'diaChi')
-    search_field = ('nhanVien')
+    search_fields = ['nhanVien']
 
 admin.site.register(LyLichCongTac, LyLichCongTacAdmin)
 
 class TDNNNhanVienAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'ngonNgu', 'mucDo')
-    search_field = ('ngonNgu')
+    search_fields = ['id','nhanVien', 'ngonNgu','mucDo']
 
 admin.site.register(TDNNNhanVien, TDNNNhanVienAdmin)
 
 class ChuyenMonNhanVienAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'chuyenMon', 'mucDo')
-    search_field = ('chuyenMon')
+    search_fields = ['id','nhanVien','chuyenMon','mucDo']
 
 admin.site.register(ChuyenMonNhanVien, ChuyenMonNhanVienAdmin)
 
 class NhanVienKTKLAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVienPB', 'ktkl', 'thoiGian')
-    search_field = ('nhanVien', 'ktkl')
+    search_fields = ['nhanVien', 'ktkl']
 
 admin.site.register(NhanVienKTKL, NhanVienKTKLAdmin)
 
@@ -103,7 +103,7 @@ admin.site.register(NhanVienKTKL, NhanVienKTKLAdmin)
 
 class NhanVienPhongBanAdmin(admin.ModelAdmin):
     list_display = ('id', 'nhanVien', 'phongBan', 'chucVu','mucLuong','get_nvKTKL', 'get_phieuluong', 'tg_batDau', 'tg_ketThuc')
-    search_field = ('nhanVien', 'phongBan')
+    search_fields = ['nhanVien', 'phongBan']
     def get_nvKTKL(self, obj):
         nvKTKL  = NhanVienKTKL.objects.filter(nhanVienPB=obj)
         return mark_safe("<br/>".join([str(m) for m in nvKTKL]))
@@ -116,7 +116,3 @@ class NhanVienPhongBanAdmin(admin.ModelAdmin):
     
 admin.site.register(NhanVienPhongBan, NhanVienPhongBanAdmin)
 
-class MyModelAdmin(admin.ModelAdmin):
-    def __init__(self,*args,**kwargs):
-        super(MyModelAdmin, self).__init__(*args, **kwargs)
-        main.EMPTY_CHANGELIST_VALUE = '-'
