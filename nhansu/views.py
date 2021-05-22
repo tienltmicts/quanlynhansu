@@ -98,8 +98,11 @@ def thongke_phongban(request):
             tg_batDau = request.GET['tg_batDau']
             tg_ketThuc = request.GET['tg_ketThuc']
             pB = get_object_or_404(PhongBan,tenPhongBan=query_string)
-            nhanVien = NhanVienPhongBan.objects.filter(phongBan=pB,tg_batDau__gt=tg_batDau).order_by('tg_batDau')
+            print(pB)
+            nhanVien = NhanVienPhongBan.objects.filter(phongBan=pB,tg_batDau__lt=tg_batDau).order_by('tg_batDau')
+            print(nhanVien)
             for nv in nhanVien:
+                print(nv)
                 if str(nv.tg_ketThuc) >= tg_ketThuc or nv.tg_ketThuc == None :
                     nvpb.append(nv)
             if nvpb == []:
@@ -112,7 +115,9 @@ def thongke_phongban(request):
         'filter': filters,
         'query_string': query_string,
         'nhanVien': nvpb,
-        'messages': messages
+        'messages': messages,
+        'tg_batDau': tg_batDau,
+        'tg_ketThuc': tg_ketThuc,
         })
     
 def thongke_chucvu(request):
@@ -136,9 +141,9 @@ def thongke_chucvu(request):
             cV = get_object_or_404(ChucVu,tenChucVu=query_string)
             nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV,tg_batDau__lt=tg_batDau).order_by('tg_batDau')
             for nv in nhanVien:
-                print(str(nv.tg_ketThuc))
+               
                 if str(nv.tg_ketThuc) >= tg_ketThuc or nv.tg_ketThuc == None :
-                    print(nv)
+                   
                     nvpb.append(nv)
             if nvpb == []:
                 messages = 'Không có nhân viên nào làm chức vụ này trong khoảng thời gian trên!'
