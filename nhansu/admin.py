@@ -62,7 +62,7 @@ class NguoiDungAdmin(admin.ModelAdmin):
     
     def get_tdnn(self, obj):
         trinhDoNN  = TDNNNhanVien.objects.filter(nhanVien=obj)
-        return mark_safe("<br/>".join([(m) for m in trinhDoNN]))
+        return mark_safe("<br/>".join([str(m) for m in trinhDoNN]))
     get_tdnn.short_description = 'Trình Độ Ngoại Ngữ'
     
     def get_thannhan(self,obj):
