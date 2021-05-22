@@ -133,7 +133,7 @@ def thongke_chucvu(request):
             tg_ketThuc = request.GET['tg_ketThuc']
             
             cV = get_object_or_404(ChucVu,tenChucVu=query_string)
-            nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV,tg_batDau__gt=tg_batDau, tg_ketThuc__lt=tg_ketThuc).order_by('tg_batDau')
+            nhanVien = NhanVienPhongBan.objects.filter(chucVu=cV,tg_batDau__lt=tg_batDau, tg_ketThuc__gt=tg_ketThuc).order_by('tg_batDau')
             for nv in nhanVien:
                 nvpb.append(nv)
             if nvpb == []:
@@ -180,7 +180,7 @@ def thongke_mucluong(request):
                 mucLuong = MucLuong.objects.filter(soTien__gt=30000000).order_by('-soTien')
                
             for ml in mucLuong:
-                nhanVien = NhanVienPhongBan.objects.filter(mucLuong=ml,tg_batDau__gt=tg_batDau, tg_ketThuc__lt=tg_ketThuc).order_by('tg_batDau')
+                nhanVien = NhanVienPhongBan.objects.filter(mucLuong=ml,tg_batDau__lt=tg_batDau, tg_ketThuc__gt=tg_ketThuc).order_by('tg_batDau')
                 for nv in nhanVien:
                     nvpb.append(nv)
             if nvpb == []:
