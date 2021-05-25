@@ -100,7 +100,7 @@ def download_phieuluong(view, id):
     response.write(u'\ufeff'.encode('utf8'))
     writer = csv.writer(response)
     writer.writerow(['ID ', 'Tên nhân viên', 'Phòng ban', 'Chức vụ', 'Lương tháng', 'KTKL','Thực lãnh','Ngày chấm', 'Đã phát lương'])
-    writer.writerow([ phieuLuong.id, phieuLuong.nhanVienPB.nhanVien, phieuLuong.nhanVienPB.phongBan, phieuLuong.nhanVienPB.chucVu, phieuLuong.nhanVienPB.mucLuong.soTien,ktkl, phieuLuong.tongTien, phieuLuong.ngayPhat, phieuLuong.status])
+    writer.writerow([ phieuLuong.id, phieuLuong.nhanVienPB.nhanVien, phieuLuong.nhanVienPB.phongBan, phieuLuong.nhanVienPB.chucVu, phieuLuong.nhanVienPB.mucLuong.soTien,ktkl, phieuLuong.tongTien, phieuLuong.ngayPhat.strftime('%d-%m-%Y'), phieuLuong.status])
     return response
 
 # def xoa_hangbangluong(request, id):
