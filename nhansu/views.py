@@ -7,7 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
 from .models import *
 import datetime
-
+import csv
 
 
 # Create your views here.
@@ -40,36 +40,68 @@ def wage_total(request):
     nvpb = []
     nhanVienPB = NhanVienPhongBan.objects.all()
     messages = ''
+    messages_error=''
     for nv in nhanVienPB:
         nvpb.append({'id': nv.id , 'nv': str(nv)})
     if request.method == 'POST':
         form = TinhLuongForm(request.POST)
         if form.is_valid():
-            nhanVien = get_object_or_404(NhanVienPhongBan, id=request.POST['nhanVien']) 
-            nvKtkl = NhanVienKTKL.objects.filter(nhanVienPB=nhanVien)
-            ktkl = 0
-            for i in nvKtkl:
-                if i.ktkl.laKT == True:
-                    ktkl = ktkl  + i.ktkl.soTienKTKL
+            if int(request.POST['nhanVien']) == 0:
+                messages_error = 'Bạn chưa chọn nhân viên!'
+            else:
+                nhanVien = get_object_or_404(NhanVienPhongBan, id=request.POST['nhanVien']) 
+                if PhieuLuong.objects.filter(nhanVienPB=nhanVien, ngayPhat__month=datetime.datetime.now().month, ngayPhat__year= datetime.datetime.now().year).exists():
+                    messages_error = 'Bạn đã tính tương cho nhân viên này trong tháng này rồi!'
                 else:
-                   ktkl = ktkl  - i.ktkl.soTienKTKL 
-            tong = ktkl + nhanVien.mucLuong.soTien
-            phieuLuong = PhieuLuong.objects.create(
-                nhanVienPB=nhanVien,
-                ngayPhat=datetime.datetime.now(),
-                tongTien=tong
-            )
-            phieuLuong.save()
-            messages = 'Bạn đã tính lương thành công!'       
+                    nvKtkl = NhanVienKTKL.objects.filter(nhanVienPB=nhanVien)
+                    ktkl = 0
+                    for i in nvKtkl:
+                        if i.thoiGian.month == datetime.datetime.now().month and i.thoiGian.year == datetime.datetime.now().year:
+                            if i.ktkl.laKT == True:
+                                ktkl = ktkl  + i.ktkl.soTienKTKL
+                            else:
+                                ktkl = ktkl  - i.ktkl.soTienKTKL 
+                    tong = ktkl + nhanVien.mucLuong.soTien
+                    phieuLuong = PhieuLuong.objects.create(
+                        nhanVienPB=nhanVien,
+                        ngayPhat=datetime.datetime.now(),
+                        tongTien=tong
+                    )
+                    phieuLuong.save()
+                    messages = 'Bạn đã tính lương thành công!'       
     else:
         form = TinhLuongForm()       
-    return render(request, "admin/tinhluong.html",{'form': form, 'nhanVienPB': nvpb, 'messages': messages})
+    return render(request, "admin/tinhluong.html",{'form': form, 'nhanVienPB': nvpb, 'messages': messages, 'messages_error': messages_error})
 
 def bangluong(request):
     bangLuong = []
-    for i in PhieuLuong.objects.all():
-        bangLuong.append(i)
+    for i in PhieuLuong.objects.all().order_by('-ngayPhat'):
+        nv_ktkl = NhanVienKTKL.objects.filter(nhanVienPB=i.nhanVienPB)
+        ktkl = []
+        for j in nv_ktkl:
+            if j.thoiGian.month == datetime.datetime.now().month and j.thoiGian.year == datetime.datetime.now().year:
+                ktkl.append(j.ktkl.tenKTKL)
+        bangLuong.append({'phieuLuong':i, 'ktkl': ktkl})
     return render(request, "admin/bangluong.html", {'bangluong': bangLuong})  
+
+def download_phieuluong(view, id):
+    PhieuLuong.objects.filter(id=id).update(
+        status= True
+    )
+    phieuLuong = get_object_or_404(PhieuLuong, id=id)
+    nv_ktkl = NhanVienKTKL.objects.filter(nhanVienPB=phieuLuong.nhanVienPB)
+    ktkl =''
+    for j in nv_ktkl:
+        if j.thoiGian.month == datetime.datetime.now().month:
+            ktkl += j.ktkl.tenKTKL + '\n'
+    i = 1
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="PhieuLuong.csv"'
+    response.write(u'\ufeff'.encode('utf8'))
+    writer = csv.writer(response)
+    writer.writerow(['ID ', 'Tên nhân viên', 'Phòng ban', 'Chức vụ', 'Lương tháng', 'KTKL','Thực lãnh','Ngày chấm', 'Đã phát lương'])
+    writer.writerow([ phieuLuong.id, phieuLuong.nhanVienPB.nhanVien, phieuLuong.nhanVienPB.phongBan, phieuLuong.nhanVienPB.chucVu, phieuLuong.nhanVienPB.mucLuong.soTien,ktkl, phieuLuong.tongTien, phieuLuong.ngayPhat, phieuLuong.status])
+    return response
 
 # def xoa_hangbangluong(request, id):
 #     pl = get_object_or_404(PhieuLuong,id=id)
@@ -233,7 +265,7 @@ def tt_thannhan(request):
             diaChi = request.POST['diaChi']
             soDienThoai = request.POST['soDienThoai']
             quanHe = request.POST['quanHe']
-            print(quanHe)
+            
             if hoVaTen != thanNhan.hoVaTen:
                 thanNhan.delete()
                 tn = ThanNhan.objects.create(

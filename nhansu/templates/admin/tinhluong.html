@@ -730,6 +730,9 @@
                             Tính
                           </div>
                         </div>
+                        {% if messages_error %}
+                          <p class="text-red">{{ messages_error }}</p>
+                        {% endif %}
                         <div class="card-body">
 
                           <div class="form-group field-taikhoan">
@@ -750,7 +753,7 @@
                                 <div class="related-widget-wrapper">
                                   <select name="nhanVien" required="" id="id_nhanVien"
                                     class=" form-control form-control-alternative" >
-                                    <option value="" selected="" data-select2-id="select2-data-2-ecfv">---------
+                                    <option value="0" selected="" data-select2-id="select2-data-2-ecfv">---------
                                     </option>
                                     {% for nv in nhanVienPB %}
                                       {{nv}}

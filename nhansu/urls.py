@@ -7,6 +7,7 @@ urlpatterns = [
    path('quanly-luong/', views.quanly_luong, name="quanly_luong"),
    path('tinhluong/', views.wage_total, name="tinhluong"),
    path('bangluong/', views.bangluong, name="bangluong"),
+   path('download_phieuluong/<int:id>/', views.download_phieuluong, name="download_phieuluong"),
    # path('xoahangbangluong/<int:id>/', views.xoa_hangbangluong, name="xoaHangbangluong"),
    path('thongke/', views.thongke, name="thongke"),
    path('tk-phongban/', views.thongke_phongban, name="tk_phongban"),

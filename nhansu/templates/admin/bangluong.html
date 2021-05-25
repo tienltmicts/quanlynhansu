@@ -791,6 +791,13 @@
 
                                           </div>
                                         </th>
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=5">KTKL</a>
+
+                                          </div>
+                                        </th>
 
                                         <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                           <div class="text">
@@ -807,6 +814,20 @@
 
                                           </div>
                                         </th>
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=7">Đã phát lương</a>
+
+                                          </div>
+                                        </th>
+                                        <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                          <div class="text">
+
+                                            <a href="?o=7">Xuất Excel</a>
+
+                                          </div>
+                                        </th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -815,13 +836,20 @@
                                           {% comment %} <td >
                                             <a href="{% url 'xoaHangbangluong' pl.id %}" class="btn btn-danger" role="button" onclick="return confirm('Bạn chắc chắn muốn huỷ chọn?');"><i class="fas fa-trash"></i></a>
                                           </td> {% endcomment %}
-                                            <td>{{pl.id}}</td>
-                                            <td>{{pl.nhanVienPB.nhanVien}}</td>
-                                            <td>{{pl.nhanVienPB.phongBan}}</td>
-                                            <td>{{pl.nhanVienPB.chucVu}}</td>
-                                            <td>{{pl.nhanVienPB.mucLuong.soTien}} vnđ</td>
-                                            <td>{{pl.tongTien}}</td>
-                                            <td>{{pl.ngayPhat}}</td>
+                                            <td>{{pl.phieuLuong.id}}</td>
+                                            <td>{{pl.phieuLuong.nhanVienPB.nhanVien}}</td>
+                                            <td>{{pl.phieuLuong.nhanVienPB.phongBan}}</td>
+                                            <td>{{pl.phieuLuong.nhanVienPB.chucVu}}</td>
+                                            <td>{{pl.phieuLuong.nhanVienPB.mucLuong.soTien}} vnđ</td>
+                                            <td>
+                                              {% for i in pl.ktkl %}
+                                                {{i}}
+                                              {%endfor%}
+                                            </td>
+                                            <td>{{pl.phieuLuong.tongTien}}</td>
+                                            <td>{{pl.phieuLuong.ngayPhat}}</td>
+                                            <td>{{pl.phieuLuong.status}}</td>
+                                            <td><a class="btn btn-success ml-2" href="{% url 'download_phieuluong' pl.phieuLuong.id %}">Tải xuống</a></td>
                                         </tr>
                                       {% endfor %}
                                     </tbody>
